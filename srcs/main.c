@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/28 14:23:36 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/29 10:30:15 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	init_frame(t_mlx *frame)
 
 #ifdef LINUX
 
-static void	init_mlx_hook(t_mlx *rt)
+static void	init_mlx_hook(t_mlx *frame)
 {
 	mlx_hook(frame->win, CLIENTMESSAGE, WM_DELETE_WINDOW, close_win, frame);
 	mlx_hook(frame->win, KEYPRESS, 1L, key_pressed, frame);

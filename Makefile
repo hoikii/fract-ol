@@ -21,7 +21,7 @@ ifeq ($(UNAME),Darwin)
 #	CFLAGS		+= -D THREADS_CNT=$(shell sysctl -n hw.ncpu)
 else
 	CFLAGS		+= -D LINUX
-	LIBMLXXDIR	= minilibx-linux
+	LIBMLXDIR	= minilibx-linux
 	LIBMLXNAME	= mlx
 	LIBMLXFILE	= libmlx.a
 	LDLIBS		= -L$(LIBFTDIR) -l$(LIBFTNAME) -L$(LIBMLXDIR) -l$(LIBMLXNAME)
