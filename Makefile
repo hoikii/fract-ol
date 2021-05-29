@@ -2,7 +2,11 @@ NAME		= fractol
 SRCDIR		= srcs/
 SRCFILES	= main.c \
 			  key.c \
-			  mouse.c
+			  mouse.c \
+			  utils.c \
+			  math_utils.c \
+			  color.c \
+			  mandelbrot.c
 SRCS		= $(addprefix $(SRCDIR), $(SRCFILES))
 OBJS		= $(SRCS:.c=.o)
 LIBFTDIR	= libft

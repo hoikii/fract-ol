@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 10:30:15 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/29 23:47:19 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@
 
 static void	init_frame(t_mlx *frame)
 {
-	int	screen_w;
-	int	screen_h;
-
 	frame->mlx = mlx_init();
-	mlx_get_screen_size(frame->mlx, &screen_w, &screen_h);
-	if (screen_w > 1024)
-		screen_w = 1024;
-	if (screen_h > 768)
-		screen_h = 768;
-	frame->win = mlx_new_window(frame->mlx, screen_w, screen_h, "fract-ol");
+	mlx_get_screen_size(frame->mlx, &frame->width, &frame->height);
+	if (frame->width > SCREEN_WIDTH)
+		frame->width = SCREEN_WIDTH;
+	if (frame->height > SCREEN_HEIGHT)
+		frame->height = SCREEN_HEIGHT;
+	frame->upperleft.x = -2.0;
+	frame->upperleft.y = 1.5;
+	frame->center = (t_point){-1, 0};
+	frame->scale = frame->width / 3;
+	frame->it_max = 50;
+	frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
+	frame->upperleft.y = frame->center.y + frame->height / frame->scale / 2;
+	frame->win = mlx_new_window(frame->mlx, frame->width, frame->height, "fract-ol");
+	frame->img.img_ptr = mlx_new_image(frame->mlx, frame->width, frame->height);
+	frame->img.imgdata = mlx_get_data_addr(frame->img.img_ptr,
+			&frame->img.bpp, &frame->img.size_line, &frame->img.endian);
 }
 
 /*
@@ -76,6 +83,7 @@ int	main(int ac, char **av)
 	if (ac < 0)
 		perror("argument error");
 	init_frame(&frame);
+	fractal_calc(frame);
 	init_mlx_hook(&frame);
 	mlx_loop(frame.mlx);
 	return (0);
