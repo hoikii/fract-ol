@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 23:52:21 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/30 15:47:11 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 	it = is_mandelbrot(vp, frame.it_max);
 	if (it)
 	{
+/*
 		double quotient = (double)it / frame.it_max;
 		int g = clamp(quotient * 255, 0, 255);
 //		rgb = (t_color){0, 1, 0};
@@ -52,6 +53,8 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 			rgb = (t_color){g, 255, g};
 		else
 			rgb = (t_color){0, g, 0};
+*/
+		rgb = get_palette(it % 16);
 		put_pxl_to_image(screen_x, screen_y, frame, rgb);
 	}
 	else
