@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 16:40:32 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/31 00:28:33 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	init_frame(t_mlx *frame)
 		frame->height = SCREEN_HEIGHT;
 	frame->upperleft.x = -2.0;
 	frame->upperleft.y = 1.5;
-	frame->center = (t_point){-1, 0};
+	frame->center = (t_point){-0.5, 0};
 	frame->scale = frame->width / 3;
 	frame->it_max = 50;
 	frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
@@ -77,12 +77,25 @@ int			close_win(t_mlx *param)
 	exit(0);
 }
 
-int	set_fractal_type(t_mlx *frame, char *av)
+int	set_fractal_type(t_mlx *frame, int ac, char **av)
 {
-	if (ft_strequ(av, "mandelbrot"))
+	if (ft_strequ(av[1], "mandelbrot"))
 		frame->type = MANDELBROT;
-	else if (ft_strequ(av, "julia"))
+	else if (ft_strequ(av[1], "julia"))
+	{
 		frame->type = JULIASET;
+		frame->julia_constant = (t_complex){0.285, 0};
+		if (ac == 4)
+			frame->julia_constant = (t_complex){ft_atof(av[2]), ft_atof(av[3])};
+		else if (ac != 2)
+		{
+			printf("Julia set must have 0 or 2 double arguments.\n");
+			printf("ex.\njulia 0.2733 0.074\njulia -0.194 0.656\njulia 0.3 0.04\njulia -0.12 0.74");
+			exit(-1);
+		}
+	}
+	else if (ft_strequ(av[1], "koch"))
+		frame->type = KOCH_SNOWFLAKE;
 	else
 		return (0);
 	return (1);
@@ -95,11 +108,10 @@ int	main(int ac, char **av)
 	if (ac < 0)
 		perror("argument error");
 #else
-	if (ac < 2 || set_fractal_type(&frame, av[1]) == 0) {
-		printf("fractol <mandelbrot | julia>\n");
+	if (ac < 2 || set_fractal_type(&frame, ac, av) <= 0) {
+		printf("fractol <mandelbrot | julia [(double), (double)] | koch>\n");
 		return (-1);
 	}
-	printf("%s\n", av[1]);
 #endif
 	init_frame(&frame);
 	render(frame);

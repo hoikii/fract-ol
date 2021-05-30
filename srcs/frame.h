@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 16:46:24 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/31 00:29:11 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 
 typedef enum e_fractal_type {
 	MANDELBROT,
-	JULIASET
+	JULIASET,
+	KOCH_SNOWFLAKE
 } t_fractal_type;
 
 typedef struct	s_point {
@@ -49,6 +50,7 @@ typedef struct	s_mlx {
 	t_point	center;
 	double	scale;
 	int		it_max;
+	t_complex	julia_constant;
 } t_mlx;
 
 int			close_win(t_mlx *param);
@@ -57,4 +59,5 @@ void	put_pxl_to_image(int x, int y, t_mlx frame, t_color rgb);
 void	render(t_mlx frame);
 void	mandelbrot_calc(int x, int y, t_mlx frame);
 void	julia_calc(int x, int y, t_mlx frame);
+void	koch_calc(t_mlx frame);
 #endif

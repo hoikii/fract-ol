@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:38:51 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 16:53:13 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/31 00:29:49 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	render(t_mlx frame)
 	int j;
 	char *msg;
 
+	if (frame.type == KOCH_SNOWFLAKE)
+		return (koch_calc(frame));
 	i = -1;
 	while (++i < frame.height)
 	{

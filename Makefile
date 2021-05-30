@@ -8,7 +8,8 @@ SRCFILES	= main.c \
 			  render.c \
 			  color.c \
 			  mandelbrot.c \
-			  julia.c
+			  julia.c \
+			  koch.c
 SRCS		= $(addprefix $(SRCDIR), $(SRCFILES))
 OBJS		= $(SRCS:.c=.o)
 LIBFTDIR	= libft
