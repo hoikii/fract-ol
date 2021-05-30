@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 00:34:05 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:47:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	mouse_hook(int btn, int click_x, int click_y, t_mlx *frame)
 		frame->center.y = frame->upperleft.y - click_y / frame->scale;
 	frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
 	frame->upperleft.y = frame->center.y + frame->height / frame->scale / 2;
-		fractal_calc(*frame);
+		render(*frame);
 	}
 		printf("btn=%d, x=%d, y=%d\n", btn, click_x, click_y);
 //	if (btn != MOUSE_LCLICK || click_y <= 0)

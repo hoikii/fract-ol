@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 16:41:28 by kanlee           ###   ########.fr       */
+/*   Created: 2021/05/30 16:40:57 by kanlee            #+#    #+#             */
+/*   Updated: 2021/05/30 16:57:02 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frame.h"
 #include "color.h"
 
-int		is_mandelbrot(t_complex p, int it_max)
+int		is_julia(t_complex z, int it_max)
 {
-	t_complex	z = {0, 0};
+	t_complex	c = {0.285, 0};
 	int			it;
 
 	it = -1;
 	while (++it < it_max)
 	{
-		z = c_add(c_square(z), p);
+		z = c_add(c_square(z), c);
 		if (c_abs_squared(z) >= 4.0)
 			return (it);
 	}
 	return (0);
 }
 
-void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
+void	julia_calc(int screen_x, int screen_y, t_mlx frame)
 {
 	t_complex vp;
 	char *imgdata;
@@ -39,7 +39,7 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 	vp.real = frame.upperleft.x + screen_x / frame.scale;
 	vp.imag = frame.upperleft.y - screen_y / frame.scale;
 
-	it = is_mandelbrot(vp, frame.it_max);
+	it = is_julia(vp, frame.it_max);
 	if (it)
 	{
 /*
@@ -59,3 +59,4 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 		put_pxl_to_image(screen_x, screen_y, frame, (t_color){0, 0, 0});
 
 }
+

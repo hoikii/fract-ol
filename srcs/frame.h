@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 23:35:44 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:46:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # define SCREEN_WIDTH 600
 # define SCREEN_HEIGHT 600
 
+typedef enum e_fractal_type {
+	MANDELBROT,
+	JULIASET
+} t_fractal_type;
+
 typedef struct	s_point {
 	double	x;
 	double	y;
@@ -28,8 +33,6 @@ typedef struct	s_point {
 typedef struct s_img {
 	void	*img_ptr;
 	char	*imgdata;
-	int		width;
-	int		height;
 	int		bpp;
 	int		size_line;
 	int		endian;
@@ -41,6 +44,7 @@ typedef struct	s_mlx {
 	int		width;
 	int		height;
 	t_img	img;
+	t_fractal_type type;
 	t_point	upperleft;
 	t_point	center;
 	double	scale;
@@ -50,4 +54,7 @@ typedef struct	s_mlx {
 int			close_win(t_mlx *param);
 void		fractal_calc(t_mlx frame);
 void	put_pxl_to_image(int x, int y, t_mlx frame, t_color rgb);
+void	render(t_mlx frame);
+void	mandelbrot_calc(int x, int y, t_mlx frame);
+void	julia_calc(int x, int y, t_mlx frame);
 #endif

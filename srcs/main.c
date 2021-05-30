@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 23:47:19 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:40:32 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "frame.h"
 #include "key.h"
 #include "mouse.h"
+#include "../libft/libft.h"
 
 static void	init_frame(t_mlx *frame)
 {
@@ -76,14 +77,32 @@ int			close_win(t_mlx *param)
 	exit(0);
 }
 
+int	set_fractal_type(t_mlx *frame, char *av)
+{
+	if (ft_strequ(av, "mandelbrot"))
+		frame->type = MANDELBROT;
+	else if (ft_strequ(av, "julia"))
+		frame->type = JULIASET;
+	else
+		return (0);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_mlx frame;
-
+#if 0
 	if (ac < 0)
 		perror("argument error");
+#else
+	if (ac < 2 || set_fractal_type(&frame, av[1]) == 0) {
+		printf("fractol <mandelbrot | julia>\n");
+		return (-1);
+	}
+	printf("%s\n", av[1]);
+#endif
 	init_frame(&frame);
-	fractal_calc(frame);
+	render(frame);
 	init_mlx_hook(&frame);
 	mlx_loop(frame.mlx);
 	return (0);

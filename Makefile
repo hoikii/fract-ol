@@ -5,8 +5,10 @@ SRCFILES	= main.c \
 			  mouse.c \
 			  utils.c \
 			  math_utils.c \
+			  render.c \
 			  color.c \
-			  mandelbrot.c
+			  mandelbrot.c \
+			  julia.c
 SRCS		= $(addprefix $(SRCDIR), $(SRCFILES))
 OBJS		= $(SRCS:.c=.o)
 LIBFTDIR	= libft

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 23:46:33 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:47:13 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	key_pressed(int keycode, t_mlx *frame)
 			frame->it_max /= 2;
 		else
 			frame->it_max *= 2;
-		fractal_calc(*frame);
+		render(*frame);
 	}
 	else if (keycode == KEY_PLUS || keycode == KEY_NP_PLUS
 			|| keycode == KEY_MINUS || keycode == KEY_NP_MINUS)
@@ -35,7 +35,7 @@ int	key_pressed(int keycode, t_mlx *frame)
 			frame->scale /= 3;
 		frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
 		frame->upperleft.y = frame->center.y + frame->height / frame->scale / 2;
-		fractal_calc(*frame);
+		render(*frame);
 	}
 
 	return (0);
