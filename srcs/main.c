@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/31 00:28:33 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/02 01:13:04 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	init_frame(t_mlx *frame)
 	frame->upperleft.y = 1.5;
 	frame->center = (t_point){-0.5, 0};
 	frame->scale = frame->width / 3;
+	frame->center = (t_point){-0.725703, 0.250738};
+	frame->scale = frame->width / 0.007476;
 	frame->it_max = 50;
 	frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
 	frame->upperleft.y = frame->center.y + frame->height / frame->scale / 2;
