@@ -6,13 +6,23 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 16:41:28 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/03 01:35:03 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frame.h"
 #include "color.h"
 
+/* With unoptimized version, We need five multiplications per each iterations.
+ * (three for znext = z^2 + c, two for checking escape condition)
+ * This can be reduced to three by caching (z.real)^2 and (z.imaginary)^2.
+ *
+ * znext.real = (z.real)^2 - (z.imag)^2 + c.real
+ * znext.imag = 2 * z.real * z.imag + c.imag
+ * escape if |znext|^2 = (z.real)^2 + (z.imag)^2 >= 2^2
+*/
+
+#if 0
 int		is_mandelbrot(t_complex p, int it_max)
 {
 	t_complex	z = {0, 0};
@@ -27,7 +37,30 @@ int		is_mandelbrot(t_complex p, int it_max)
 	}
 	return (0);
 }
+#else
 
+int		is_mandelbrot(t_complex c, int it_max)
+{
+	t_complex	z = {0, 0};
+	int			it;
+	double		zr_squared;
+	double		zi_squared;
+
+	zr_squared = 0;
+	zi_squared = 0;
+	it = -1;
+	while (++it < it_max)
+	{
+		z.imag = (z.real + z.real) * z.imag + c.imag;
+		z.real = zr_squared - zi_squared + c.real;
+		zr_squared = z.real * z.real;
+		zi_squared = z.imag * z.imag;
+		if (zr_squared + zi_squared >= 4.0)
+			return (it);
+	}
+	return (it);
+}
+#endif
 void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 {
 	t_complex vp;
@@ -40,7 +73,7 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 	vp.imag = frame.upperleft.y - screen_y / frame.scale;
 
 	it = is_mandelbrot(vp, frame.it_max);
-	if (it)
+	if (it != frame.it_max)
 	{
 /*
 		double quotient = (double)it / frame.it_max;
