@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/02 17:16:23 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/03 01:36:10 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ printf("btn=%d, x=%d, y=%d\n", btn, click_x, click_y);
 	}
 	else if (btn == MOUSE_WHEELDOWN || btn == MOUSE_WHEELUP)
 	{
-		frame->center.x = frame->upperleft.x + click_x / frame->scale;
-		frame->center.y = frame->upperleft.y - click_y / frame->scale;
-
 		if (btn == MOUSE_WHEELDOWN)
-			frame->scale *= 2;
+		{
+			frame->center.x = frame->upperleft.x + click_x / frame->scale;
+			frame->center.y = frame->upperleft.y - click_y / frame->scale;
+			frame->scale *= 1.1;
+		}
 		else
-			frame->scale /= 2;
+			frame->scale *= 0.9;
 		frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
 		frame->upperleft.y = frame->center.y + frame->height / frame->scale / 2;
 
