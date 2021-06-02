@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/03 01:35:03 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/03 01:46:11 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int		is_mandelbrot(t_complex c, int it_max)
 	return (it);
 }
 #endif
+
+int cclamp(n) { if (n < 0) n = 0; if (n > 255) n = 255; return n;}
+
 void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 {
 	t_complex vp;
@@ -86,6 +89,7 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 			rgb = (t_color){0, g, 0};
 */
 		rgb = get_palette(it % 16);
+		rgb = (t_color){cclamp(255-it * 6), cclamp(255-it*2), cclamp(255-it*10)};
 		put_pxl_to_image(screen_x, screen_y, frame, rgb);
 	}
 	else
