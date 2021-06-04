@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 16:07:39 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/05 02:31:29 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/05 02:47:50 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char				*ft_ftoa(long double n, int precision)
 	int			ilen;
 	char		*ret;
 	int			sign;
-	char		ch;
 
 	sign = 0;
 	if (n < 0)
@@ -92,9 +91,11 @@ char				*ft_ftoa(long double n, int precision)
 		sign = 1;
 		n = -n;
 	}
-	ret = malloc(ilen + sign + precision + 2);
-	ret[0] = '-';
 	ilen = intlen(n);
+	ret = malloc(ilen + sign + precision + 2);
+	if (!ret)
+		return (NULL);
+	ret[0] = '-';
 	ret[ilen + sign + precision + 1] = '\0';
 	if (precision > 0)
 		ret[ilen + sign] = '.';
