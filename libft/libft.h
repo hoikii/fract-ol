@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 13:09:12 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 17:37:28 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/04 05:25:12 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_cntwords(const char *str, char sep);
 int					ft_strequ(const char *s1, const char *s2);
 double				ft_atof(const char *s);
+char				*ft_ftoa(long double n, int precision);
 #endif

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 17:16:08 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 17:37:47 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/05 01:47:22 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 double	ft_atof(const char *str)
 {
-	double ret;
-	int sign;
-	double decimal;
+	double	ret;
+	int		sign;
+	double	decimal;
 
 	ret = ft_atoi(str);
 	sign = 1;
