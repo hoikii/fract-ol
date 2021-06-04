@@ -6,10 +6,11 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/03 01:46:11 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/05 02:45:37 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "frame.h"
 #include "color.h"
 
@@ -62,7 +63,7 @@ int		is_mandelbrot(t_complex c, int it_max)
 }
 #endif
 
-int cclamp(n) { if (n < 0) n = 0; if (n > 255) n = 255; return n;}
+int cclamp(double n) { if (n < 0) n = 0; if (n > 255) n = 255; return n;}
 
 void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 {
@@ -78,19 +79,16 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 	it = is_mandelbrot(vp, frame.it_max);
 	if (it != frame.it_max)
 	{
-/*
-		double quotient = (double)it / frame.it_max;
-		int g = clamp(quotient * 255, 0, 255);
-//		rgb = (t_color){0, 1, 0};
-//		rgb.g = clamp(quotient * 255, 0, 255);
-		if (quotient > 0.5)
-			rgb = (t_color){g, 255, g};
-		else
-			rgb = (t_color){0, g, 0};
-*/
-		rgb = get_palette(it % 16);
-		rgb = (t_color){cclamp(255-it * 6), cclamp(255-it*2), cclamp(255-it*10)};
-		put_pxl_to_image(screen_x, screen_y, frame, rgb);
+//			if (it > 0)
+//				it = log(it) / log(frame.it_max) * 16;
+			it = (double)it / frame.it_max * 16;
+			rgb = get_palette(it);
+//		else {
+//			it = it / (double)frame.it_max * 100;
+//			rgb = (t_color){cclamp(255-it * 2), cclamp(255-it*6), cclamp(255-it*1)};
+//			rgb = (t_color){cclamp(255-it * 6), cclamp(255-it*2), cclamp(255-it*10)};
+//		}
+	put_pxl_to_image(screen_x, screen_y, frame, rgb);
 	}
 	else
 		put_pxl_to_image(screen_x, screen_y, frame, (t_color){0, 0, 0});

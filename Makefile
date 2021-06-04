@@ -6,6 +6,7 @@ SRCFILES	= main.c \
 			  utils.c \
 			  math_utils.c \
 			  render.c \
+			  image.c \
 			  color.c \
 			  mandelbrot.c \
 			  julia.c \
@@ -44,7 +45,7 @@ CCEND		= \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) srcs/frame.h
 	@echo "$(CCBLUE) >>> make libft with bonus <<< $(CCEND)"
 	@$(MAKE) bonus -C libft
 	@echo "$(CCBLUE) >>> make minilibx (warning suppressed) <<< $(CCEND)"

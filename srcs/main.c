@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/02 01:13:04 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/05 02:42:06 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,27 @@
 static void	init_frame(t_mlx *frame)
 {
 	frame->mlx = mlx_init();
-	mlx_get_screen_size(frame->mlx, &frame->width, &frame->height);
-	if (frame->width > SCREEN_WIDTH)
-		frame->width = SCREEN_WIDTH;
-	if (frame->height > SCREEN_HEIGHT)
-		frame->height = SCREEN_HEIGHT;
+//	frame->width = IMG_WIDTH + MENU_WIDTH;
+//	frame->height = IMG_HEIGHT;
 	frame->upperleft.x = -2.0;
 	frame->upperleft.y = 1.5;
 	frame->center = (t_point){-0.5, 0};
-	frame->scale = frame->width / 3;
+	frame->scale = IMG_WIDTH / 3;
 	frame->center = (t_point){-0.725703, 0.250738};
-	frame->scale = frame->width / 0.007476;
 	frame->it_max = 50;
-	frame->upperleft.x = frame->center.x - frame->width / frame->scale / 2;
-	frame->upperleft.y = frame->center.y + frame->height / frame->scale / 2;
-	frame->win = mlx_new_window(frame->mlx, frame->width, frame->height, "fract-ol");
-	frame->img.img_ptr = mlx_new_image(frame->mlx, frame->width, frame->height);
+	frame->scale = 1104900.05530* 200;
+	frame->it_max = 1600;
+	frame->scale = 110 * 200;
+	frame->it_max = 200;
+	frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
+	frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
+	frame->win = mlx_new_window(frame->mlx, IMG_WIDTH + MENU_WIDTH, IMG_HEIGHT, "fract-ol");
+	frame->img.img_ptr = mlx_new_image(frame->mlx, IMG_WIDTH, IMG_HEIGHT);
 	frame->img.imgdata = mlx_get_data_addr(frame->img.img_ptr,
 			&frame->img.bpp, &frame->img.size_line, &frame->img.endian);
+	frame->menu.img_ptr = mlx_new_image(frame->mlx, MENU_WIDTH, IMG_HEIGHT);
+	frame->menu.imgdata = mlx_get_data_addr(frame->menu.img_ptr,
+			&frame->menu.bpp, &frame->menu.size_line, &frame->menu.endian);
 }
 
 /*
