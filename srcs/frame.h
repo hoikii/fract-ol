@@ -6,14 +6,30 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/04 18:58:16 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/06 00:51:58 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRAME_H
 # define FRAME_H
 
-# include "../minilibx/mlx.h"
+# ifdef BONUS
+#  undef BONUS
+#  define BONUS 1
+# else
+#  define BONUS 0
+# endif
+
+# ifndef THREADS_CNT
+#  define THREADS_CNT 1
+# endif
+
+# ifdef LINUX
+#  include "../minilibx-linux/mlx.h"
+# else
+#  include "../minilibx/mlx.h"
+# endif
+
 # include "math_utils.h"
 # include "color.h"
 
@@ -25,12 +41,12 @@ typedef enum e_fractal_type {
 	MANDELBROT,
 	JULIASET,
 	KOCH_SNOWFLAKE
-} t_fractal_type;
+}	t_fractal_type;
 
-typedef struct	s_point {
+typedef struct s_point {
 	double	x;
 	double	y;
-}				t_point;
+} t_point;
 
 typedef struct s_img {
 	void	*img_ptr;
@@ -54,6 +70,11 @@ typedef struct	s_mlx {
 	int		it_max;
 	t_complex	julia_constant;
 } t_mlx;
+
+typedef struct s_threads {
+	int		tid;
+	t_mlx	frame;
+}	t_threads;
 
 int			close_win(t_mlx *param);
 void		fractal_calc(t_mlx frame);

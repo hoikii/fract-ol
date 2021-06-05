@@ -36,6 +36,7 @@ else
 	LDLIBS		+= -L/usr/lib -lm -lXext -lX11 -lpthread
 #	CFLAGS		+= -D THREADS_CNT=$(shell grep -c processor /proc/cpuinfo)
 endif
+CFLAGS += -D BONUS -D THREADS_CNT=$(shell getconf _NPROCESSORS_ONLN)
 
 CCBLUE		= \033[34m
 CCBLUE_BOLD	= \033[1;34m
