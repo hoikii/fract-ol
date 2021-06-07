@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:38:51 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:13:50 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 23:13:39 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,36 @@ void	*render_per_thread(void *arg)
 	int		tid = ((t_threads *)arg)->tid;
 	int i;
 	int j;
+	int sign;
+	int pos;
 
 //	if (frame->type == KOCH_SNOWFLAKE)
 //		return (koch_calc(frame));
-	i = -1;
-	while (++i < IMG_HEIGHT)
+	i = 0;
+	sign = 1;
+#if 1
+	while (i < IMG_HEIGHT)
 	{
-		if (i % THREADS_CNT != tid)
+		pos = IMG_HEIGHT / 2 + i * sign;
+		if (sign > 0)
+			i++;
+		sign *= -1;
+#else
+	while (i++ < IMG_HEIGHT)
+	{
+		pos = i-1;
+#endif
+		if (i % THREADS_CNT != tid || pos < 0 || pos >= IMG_HEIGHT)
 			continue;
 		j = -1;
 		while (++j < IMG_WIDTH)
 		{
 			if (frame->type == MANDELBROT)
-				mandelbrot_calc(j, i, frame);
+				mandelbrot_calc(j, pos, frame);
 			else if (frame->type == JULIASET)
-				julia_calc(j, i, frame);
+				julia_calc(j, pos, frame);
 		}
-	if (tid == 0 && i % 10 == 0)
+	if (tid == 0 && i % 1 == 0)
 		img_to_window(frame);
 	}
 //	img_to_window(frame);

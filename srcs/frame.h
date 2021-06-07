@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:10:24 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 22:59:58 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct	s_mlx {
 	double	scale;
 	int		it_max;
 	t_complex	julia_constant;
-	int a[100000];
+	int a[360000];
 } t_mlx;
 
 typedef struct s_threads {

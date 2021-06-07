@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:08:46 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 22:58:57 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	init_frame(t_mlx *frame)
 	frame->it_max = 50;
 	frame->scale = 1104900.05530* 200;
 	frame->it_max = 1600;
-	frame->scale = 110 * 200;
-	frame->it_max = 200;
+//	frame->scale = 110 * 200;
+//	frame->it_max = 200;
 	frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
 	frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
 	frame->win = mlx_new_window(frame->mlx, IMG_WIDTH + MENU_WIDTH, IMG_HEIGHT, "fract-ol");
