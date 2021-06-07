@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/06 00:51:58 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 19:10:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,20 @@ typedef struct	s_mlx {
 	double	scale;
 	int		it_max;
 	t_complex	julia_constant;
+	int a[100000];
 } t_mlx;
 
 typedef struct s_threads {
 	int		tid;
-	t_mlx	frame;
+	t_mlx	*frame;
 }	t_threads;
 
 int			close_win(t_mlx *param);
 void		fractal_calc(t_mlx frame);
-void	put_pxl_to_image(int x, int y, t_mlx frame, t_color rgb);
-void	img_to_window(t_mlx frame);
-void	render(t_mlx frame);
-void	mandelbrot_calc(int x, int y, t_mlx frame);
-void	julia_calc(int x, int y, t_mlx frame);
-void	koch_calc(t_mlx frame);
+void	put_pxl_to_image(int x, int y, t_mlx *frame, t_color rgb);
+void	img_to_window(t_mlx *frame);
+void	render(t_mlx *frame);
+void	mandelbrot_calc(int x, int y, t_mlx *frame);
+void	julia_calc(int x, int y, t_mlx *frame);
+void	koch_calc(t_mlx *frame);
 #endif

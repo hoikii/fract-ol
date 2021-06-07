@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:40:57 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/30 18:25:02 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 19:03:44 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		is_julia(t_complex z, int it_max, t_complex c)
 	return (0);
 }
 
-void	julia_calc(int screen_x, int screen_y, t_mlx frame)
+void	julia_calc(int screen_x, int screen_y, t_mlx *frame)
 {
 	t_complex vp;
 	char *imgdata;
@@ -35,13 +35,13 @@ void	julia_calc(int screen_x, int screen_y, t_mlx frame)
 	int pos;
 	int it;
 
-	vp.real = frame.upperleft.x + screen_x / frame.scale;
-	vp.imag = frame.upperleft.y - screen_y / frame.scale;
-	it = is_julia(vp, frame.it_max, frame.julia_constant);
+	vp.real = frame->upperleft.x + screen_x / frame->scale;
+	vp.imag = frame->upperleft.y - screen_y / frame->scale;
+	it = is_julia(vp, frame->it_max, frame->julia_constant);
 	if (it)
 	{
 
-		double quotient = (double)it / frame.it_max;
+		double quotient = (double)it / frame->it_max;
 		int g = clamp(quotient * 255, 0, 255);
 		rgb = (t_color){0, 1, 0};
 		rgb.g = clamp(quotient * 255, 0, 255);

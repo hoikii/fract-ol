@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/04 23:10:52 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 19:10:43 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	key_pressed(int keycode, t_mlx *frame)
 	else if (keycode == KEY_COMMA || keycode == KEY_PERIOD)
 	{
 		if (keycode == KEY_COMMA)
-			frame->it_max /= 2;
+			frame->it_max /= 1.1;
 		else
-			frame->it_max *= 2;
+			frame->it_max *= 1.1;
 		if (frame->it_max <= 0)
 			frame->it_max = 1;
-		render(*frame);
+		render(frame);
 	}
 	else if (keycode == KEY_PLUS || keycode == KEY_NP_PLUS
 			|| keycode == KEY_MINUS || keycode == KEY_NP_MINUS)
@@ -44,7 +44,7 @@ int	key_pressed(int keycode, t_mlx *frame)
 		}
 		frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
 		frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
-		render(*frame);
+		render(frame);
 	}
 
 	return (0);

@@ -6,12 +6,12 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 00:27:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/31 00:31:27 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 19:03:36 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frame.h"
 
-void	koch_calc(t_mlx frame)
+void	koch_calc(t_mlx *frame)
 {
 }

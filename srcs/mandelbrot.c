@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/05 02:45:37 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 19:04:34 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		is_mandelbrot(t_complex c, int it_max)
 
 int cclamp(double n) { if (n < 0) n = 0; if (n > 255) n = 255; return n;}
 
-void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
+void	mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
 {
 	t_complex vp;
 	char *imgdata;
@@ -73,18 +73,18 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx frame)
 	int pos;
 	int it;
 
-	vp.real = frame.upperleft.x + screen_x / frame.scale;
-	vp.imag = frame.upperleft.y - screen_y / frame.scale;
+	vp.real = frame->upperleft.x + screen_x / frame->scale;
+	vp.imag = frame->upperleft.y - screen_y / frame->scale;
 
-	it = is_mandelbrot(vp, frame.it_max);
-	if (it != frame.it_max)
+	it = is_mandelbrot(vp, frame->it_max);
+	if (it != frame->it_max)
 	{
 //			if (it > 0)
-//				it = log(it) / log(frame.it_max) * 16;
-			it = (double)it / frame.it_max * 16;
+//				it = log(it) / log(frame->it_max) * 16;
+			it = (double)it / frame->it_max * 16;
 			rgb = get_palette(it);
 //		else {
-//			it = it / (double)frame.it_max * 100;
+//			it = it / (double)frame->it_max * 100;
 //			rgb = (t_color){cclamp(255-it * 2), cclamp(255-it*6), cclamp(255-it*1)};
 //			rgb = (t_color){cclamp(255-it * 6), cclamp(255-it*2), cclamp(255-it*10)};
 //		}

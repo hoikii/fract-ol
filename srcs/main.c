@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/05 02:42:06 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/07 19:08:46 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int ac, char **av)
 	}
 #endif
 	init_frame(&frame);
-	render(frame);
+	render(&frame);
 	init_mlx_hook(&frame);
 	mlx_loop(frame.mlx);
 	return (0);
