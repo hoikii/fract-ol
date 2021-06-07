@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 22:59:58 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/08 01:25:46 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_mlx {
 	int		width;
 	int		height;
 	t_img	img;
+	t_img	img_move;
 	t_img	menu;
 	t_fractal_type type;
 	t_point	upperleft;
@@ -70,6 +71,9 @@ typedef struct	s_mlx {
 	int		it_max;
 	t_complex	julia_constant;
 	int a[360000];
+	int		lbtn_pressed;
+	t_point move_from;
+	t_point move_from_vp;
 } t_mlx;
 
 typedef struct s_threads {

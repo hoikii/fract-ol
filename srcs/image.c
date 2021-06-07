@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:06:28 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/08 02:03:01 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ static void	put_info(t_mlx *frame)
 
 void	img_to_window(t_mlx *frame)
 {
-
-	mlx_put_image_to_window(frame->mlx, frame->win, frame->img.img_ptr, MENU_WIDTH, 0);
+	if (frame->lbtn_pressed)
+		mlx_put_image_to_window(frame->mlx, frame->win, frame->img_move.img_ptr, MENU_WIDTH, 0);
+	else
+		mlx_put_image_to_window(frame->mlx, frame->win, frame->img.img_ptr, MENU_WIDTH, 0);
 	put_info(frame);
 
 }

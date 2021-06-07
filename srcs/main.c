@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 22:58:57 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/08 01:44:16 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	init_frame(t_mlx *frame)
 	frame->scale = IMG_WIDTH / 3;
 	frame->center = (t_point){-0.725703, 0.250738};
 	frame->it_max = 50;
-	frame->scale = 1104900.05530* 200;
-	frame->it_max = 1600;
+//	frame->scale = 1104900.05530* 200;
+//	frame->it_max = 1600;
 //	frame->scale = 110 * 200;
 //	frame->it_max = 200;
 	frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
@@ -41,6 +41,10 @@ static void	init_frame(t_mlx *frame)
 	frame->menu.img_ptr = mlx_new_image(frame->mlx, MENU_WIDTH, IMG_HEIGHT);
 	frame->menu.imgdata = mlx_get_data_addr(frame->menu.img_ptr,
 			&frame->menu.bpp, &frame->menu.size_line, &frame->menu.endian);
+	frame->img_move.img_ptr = mlx_new_image(frame->mlx, IMG_WIDTH, IMG_HEIGHT);
+	frame->img_move.imgdata = mlx_get_data_addr(frame->img_move.img_ptr,
+			&frame->img_move.bpp, &frame->img_move.size_line, &frame->img_move.endian);
+	frame->lbtn_pressed = 0;
 }
 
 /*
@@ -54,12 +58,24 @@ static void	init_frame(t_mlx *frame)
 
 #ifdef LINUX
 
+#define BUTTONPRESS 4
+#define BUTTONPRESSMASK 1L<<2
+#define BUTTONRELEASE 5
+#define BUTTONRELEASEMASK 1L<<3
+#define MOTIONNOTIFY 6
+#define POINTERMOTIONMASK 1L<<6
+#define BUTTON1MOTIONMASK 1L<<8
+
+
 static void	init_mlx_hook(t_mlx *frame)
 {
 	mlx_hook(frame->win, CLIENTMESSAGE, WM_DELETE_WINDOW, close_win, frame);
 	mlx_hook(frame->win, KEYPRESS, 1L, key_pressed, frame);
 //	mlx_hook(frame->win, VISIBILITYNOTIFY, (1L << 16), put_img_to_window, frame);
-	mlx_mouse_hook(frame->win, mouse_hook, frame);
+//	mlx_mouse_hook(frame->win, mouse_hook, frame);
+	mlx_hook(frame->win, BUTTONPRESS, BUTTONPRESSMASK, mouse_press, frame);
+	mlx_hook(frame->win, BUTTONRELEASE, BUTTONRELEASEMASK, mouse_release, frame);
+	mlx_hook(frame->win, MOTIONNOTIFY, BUTTON1MOTIONMASK, mouse_move, frame);
 }
 
 #else
