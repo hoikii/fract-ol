@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/08 01:44:16 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/12 22:10:09 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ int			close_win(t_mlx *param)
 
 int	set_fractal_type(t_mlx *frame, int ac, char **av)
 {
-	if (ft_strequ(av[1], "mandelbrot"))
+	if (ft_strequ(av[1], "mandelbrot") || ft_strequ(av[1], "m"))
 		frame->type = MANDELBROT;
-	else if (ft_strequ(av[1], "julia"))
+	else if (ft_strequ(av[1], "julia") || ft_strequ(av[1], "j"))
 	{
 		frame->type = JULIASET;
 		frame->julia_constant = (t_complex){0.285, 0};
