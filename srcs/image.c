@@ -6,13 +6,14 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/08 02:03:01 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/21 16:36:20 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "frame.h"
 #include "../libft/libft.h"
+#include <stdio.h>
 
 static void	put_info(t_mlx *frame)
 {
@@ -55,3 +56,130 @@ void	put_pxl_to_image(int x, int y, t_mlx *frame, t_color rgb)
 	*(unsigned int *)(&imgdata[pos]) = color;
 }
 
+void	map_colors(t_mlx *frame)
+{
+
+	int		*histogram;
+	long long	total_iterations;
+	int i, j, k;
+	double cc = 0;
+	histogram = malloc(sizeof(int) * (frame->it_max + 1));
+	if (!histogram)
+		return ;
+	ft_bzero(histogram, sizeof(int) * (frame->it_max + 1));
+
+	unsigned int min = -1;
+	int max = 0;
+	i = -1;
+	while (++i < IMG_HEIGHT)
+	{
+		j = -1;
+		while (++j < IMG_WIDTH)
+		{
+			histogram[frame->iterations_per_pixel[i][j]]++;
+			if (min > frame->iterations_per_pixel[i][j])
+				min = frame->iterations_per_pixel[i][j];
+			if (max < frame->iterations_per_pixel[i][j])
+				max = frame->iterations_per_pixel[i][j];
+		}
+
+	}
+
+		
+int *hist = malloc(sizeof(int) * (frame->it_max + 1));
+	total_iterations = 0;
+	i = -1;
+	while (++i <= frame->it_max)
+	{
+		hist[i] = histogram[i];
+		total_iterations += histogram[i];
+		histogram[i] = total_iterations;
+	}
+
+	t_color rgb_start = (t_color){0, 0, 0};
+	t_color rgb_end = (t_color){250,100,0};
+	t_color *color_table = malloc(sizeof(t_color) * (frame->it_max + 1));
+	for (int q=min; q < max; q++)
+	{
+color_table[q].r = rgb_start.r + (rgb_end.r - rgb_start.r) * (double)(q-min) / (max-min);
+color_table[q].g = rgb_start.g + (rgb_end.g - rgb_start.g) * (double)(q-min) / (max-min);
+color_table[q].b = rgb_start.b + (rgb_end.b - rgb_start.b) * (double)(q-min) / (max-min);
+	}
+
+	i = -1;
+	while (++i < IMG_HEIGHT)
+	{
+		j = -1;
+		while (++j < IMG_WIDTH)
+		{
+			if (frame->iterations_per_pixel[i][j] == frame->it_max)
+			{
+				put_pxl_to_image(j, i, frame, (t_color){0, 0, 0});
+				continue ;
+			}
+			k = -1;
+//			cc = 0;
+//			while (++k <= frame->iterations_per_pixel[i][j])
+//				cc += histogram[k];
+//			cc /= total_iterations;
+			cc = histogram[frame->iterations_per_pixel[i][j]] / (double)total_iterations;
+			put_pxl_to_image(j, i, frame, get_palette(cc * 15));
+//			put_pxl_to_image(j, i, frame, color_table[frame->iterations_per_pixel[i][j]]);
+		}
+	}
+	prn_histogram(hist, frame->it_max);
+printf("cneter = %lf, %lf\n", frame->center.x, frame->center.y);
+	free(histogram);
+	free(color_table);
+}
+
+void prn_histogram(int *histogram, int it_max)
+{
+	int i;
+	int j;
+	long long total;
+	int max;
+
+
+	int hist[11] = {0,};
+
+	system("clear");
+	i = -1;
+	total = 0;
+	max = 0;
+	while (++i <= it_max)
+	{
+		total += histogram[i];
+		hist[(int)((double)i / it_max * 10)] += histogram[i];
+		if (max < histogram[i])
+			max = histogram[i];
+	}
+	i = 19;
+	while (i >= 0)
+	{
+		j = -1;
+		while (++j < 11)
+		{
+			printf("   %c   ", (hist[j] / (double)total * 100 > i) ? '.' : ' ');
+		}
+		printf("\n");
+		i -= 1;
+	}
+	j = -1;
+	while (++j < 11)
+		printf("=======");
+	printf("\n");
+	j = -1;
+	while (++j < 11)
+		printf("  %2d   ", j);
+	printf("\n");
+	j = -1;
+	while (++j < 11)
+		printf(" %4.1lf%% ", hist[j] / (double)total * 100);
+	max=0;
+	for (int q=0; q<=6; q++)
+		max += hist[q];
+	max += hist[10];
+	printf("\ntotal: %d\n0to6: %.1f%%\n", total, max / (double)total * 100);
+
+}

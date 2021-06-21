@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/08 01:25:46 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/14 17:34:50 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct	s_mlx {
 	double	scale;
 	int		it_max;
 	t_complex	julia_constant;
-	int a[360000];
+	int iterations_per_pixel[IMG_HEIGHT][IMG_WIDTH];
 	int		lbtn_pressed;
 	t_point move_from;
 	t_point move_from_vp;
@@ -89,4 +89,5 @@ void	render(t_mlx *frame);
 void	mandelbrot_calc(int x, int y, t_mlx *frame);
 void	julia_calc(int x, int y, t_mlx *frame);
 void	koch_calc(t_mlx *frame);
+void	map_colors(t_mlx *frame);
 #endif

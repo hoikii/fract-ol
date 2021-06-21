@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:04:34 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/14 00:33:02 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
 	vp.imag = frame->upperleft.y - screen_y / frame->scale;
 
 	it = is_mandelbrot(vp, frame->it_max);
+	frame->iterations_per_pixel[screen_y][screen_x] = it;
+	return ;
 	if (it != frame->it_max)
 	{
 //			if (it > 0)
