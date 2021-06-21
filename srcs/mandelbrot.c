@@ -6,13 +6,15 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/14 00:33:02 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/21 18:20:44 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "frame.h"
 #include "color.h"
+
+#define ZERO 0.0000000001
 
 /* With unoptimized version, We need five multiplications per each iterations.
  * (three for znext = z^2 + c, two for checking escape condition)
@@ -46,6 +48,10 @@ int		is_mandelbrot(t_complex c, int it_max)
 	int			it;
 	double		zr_squared;
 	double		zi_squared;
+	t_complex	oldz = {0, 0};
+	int			counter = 0;
+	int			counter_limit = 2;
+
 
 	zr_squared = 0;
 	zi_squared = 0;
@@ -58,6 +64,17 @@ int		is_mandelbrot(t_complex c, int it_max)
 		zi_squared = z.imag * z.imag;
 		if (zr_squared + zi_squared >= 4.0)
 			return (it);
+#if 1
+		if (fabs(z.real - oldz.real) < ZERO && fabs(z.imag - oldz.imag) < ZERO)
+			return (it_max);
+		if (counter == counter_limit)
+		{
+			oldz = z;
+			counter = 0;
+			counter_limit *= 2;
+		}
+		counter++;
+#endif
 	}
 	return (it);
 }
