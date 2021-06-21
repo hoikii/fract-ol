@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:10:43 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/15 00:49:34 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	key_pressed(int keycode, t_mlx *frame)
 {
-	printf("key=%d\n", keycode);
+//	printf("key=%d\n", keycode);
 	if (keycode == KEY_ESC)
 		close_win(frame);
 	else if (keycode == KEY_COMMA || keycode == KEY_PERIOD)
@@ -35,12 +35,12 @@ int	key_pressed(int keycode, t_mlx *frame)
 	{
 		if (keycode == KEY_PLUS || keycode == KEY_NP_PLUS)
 		{			frame->scale *= 1.1;
-			frame->it_max = pow(1.6, log(frame->scale/200)/log(6)) * 50;
+//			frame->it_max = pow(1.6, log(frame->scale/200)/log(6)) * 50;
 		}
 		else
 		{
 			frame->scale *= 0.9;
-			frame->it_max = pow(1.6, log(frame->scale/200)/log(6)) * 50;
+//			frame->it_max = pow(1.6, log(frame->scale/200)/log(6)) * 50;
 		}
 		frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
 		frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
