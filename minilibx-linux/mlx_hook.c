@@ -25,12 +25,12 @@ int	mlx_hook(t_win_list *win, int x_event, int x_mask,
 
 int	mlx_do_key_autorepeatoff(t_xvar *xvar)
 {
-  XAutoRepeatOff(xvar->display);
+  XkbSetDetectableAutoRepeat(xvar->display, 1, NULL);
 }
 
 int	mlx_do_key_autorepeaton(t_xvar *xvar)
 {
-  XAutoRepeatOn(xvar->display);
+  XkbSetDetectableAutoRepeat(xvar->display, 0, NULL);
 }
 
 
