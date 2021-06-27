@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 18:03:43 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:30:41 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	init_frame(t_mlx *frame)
 			&frame->img_move.bpp, &frame->img_move.size_line, &frame->img_move.endian);
 	frame->lbtn_pressed = 0;
 	frame->zoom_mode = 0;
+	frame->color_mode = 0;
 }
 
 /*

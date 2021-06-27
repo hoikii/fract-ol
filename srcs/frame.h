@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 17:55:59 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 19:14:54 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_mlx {
 	int iterations_per_pixel[IMG_HEIGHT][IMG_WIDTH];
 	int		lbtn_pressed;
 	int		zoom_mode;
+	int		color_mode;
 	t_point move_from;
 	t_point move_from_vp;
 } t_mlx;

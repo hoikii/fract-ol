@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 17:55:29 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:17:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,26 @@ static void	put_info(t_mlx *frame)
 	msg = ft_strjoin("scale: ", ft_ftoa(frame->scale / (IMG_WIDTH / 3), 6));
 	mlx_string_put(frame->mlx, frame->win, 10, 40, 0x00ffffff, msg);
 	free(msg);
-	mlx_string_put(frame->mlx, frame->win, 10, 60, 0x00ffffff, "plot range");
-	msg = ft_strjoin(ft_ftoa(frame->center.x - IMG_WIDTH / frame->scale / 2, 6),
-			   " <= x <= ");
-	msg = ft_strjoin(msg, ft_ftoa(frame->center.x + IMG_WIDTH / frame->scale / 2, 6));
-	mlx_string_put(frame->mlx, frame->win, 10, 80, 0x00ffffff, msg);
-	if (frame->zoom_mode)
-		mlx_string_put(frame->mlx, frame->win, 10, 100, 0x00ffffff, "zoom mode: follow mouse position");
-	else
-		mlx_string_put(frame->mlx, frame->win, 10, 100, 0x00ffffff, "zoom mode: fixed");
-
+	msg = ft_strjoin("1px = ", ft_ftoa(1/frame->scale, 22));
+	mlx_string_put(frame->mlx, frame->win, 10, 60, 0x00ffffff, msg);
 	free(msg);
+//	mlx_string_put(frame->mlx, frame->win, 10, 60, 0x00ffffff, "plot range");
+//	msg = ft_strjoin(ft_ftoa(frame->center.x - IMG_WIDTH / frame->scale / 2, 6),
+//			   " <= x <= ");
+//	msg = ft_strjoin(msg, ft_ftoa(frame->center.x + IMG_WIDTH / frame->scale / 2, 6));
+	msg = ft_strjoin("center x: ", ft_ftoa(frame->center.x, 12));
+	mlx_string_put(frame->mlx, frame->win, 10, 80, 0x00ffffff, msg);
+	free(msg);
+	msg = ft_strjoin("center y: ", ft_ftoa(frame->center.y, 12));
+	mlx_string_put(frame->mlx, frame->win, 10, 100, 0x00ffffff, msg);
+	free(msg);
+	if (frame->zoom_mode)
+		msg = "zoom mode: follow mouse position";
+	else
+		msg = "zoom mode: fixed";
+	mlx_string_put(frame->mlx, frame->win, 10, 120, 0x00ffffff, msg);
+
+//	free(msg);
 }
 
 void	img_to_window(t_mlx *frame)
@@ -103,8 +112,8 @@ int *hist = malloc(sizeof(int) * (frame->it_max + 1));
 		histogram[i] = total_iterations;
 	}
 
-	t_color rgb_start = (t_color){0, 0, 0};
-	t_color rgb_end = (t_color){250,100,0};
+	t_color rgb_start = (t_color){250, 100, 0};
+	t_color rgb_end = (t_color){255,255,255};
 	t_color *color_table = malloc(sizeof(t_color) * (frame->it_max + 1));
 	for (int q=min; q < max; q++)
 	{
@@ -130,8 +139,24 @@ color_table[q].b = rgb_start.b + (rgb_end.b - rgb_start.b) * (double)(q-min) / (
 //				cc += histogram[k];
 //			cc /= total_iterations;
 			cc = histogram[frame->iterations_per_pixel[i][j]] / (double)total_iterations;
-			put_pxl_to_image(j, i, frame, get_palette(cc * 15));
-//			put_pxl_to_image(j, i, frame, color_table[frame->iterations_per_pixel[i][j]]);
+			if (frame->color_mode == 0)
+				put_pxl_to_image(j, i, frame, get_palette(cc * 15));
+			else if (frame->color_mode == 1)
+			{
+				int aa = frame->iterations_per_pixel[i][j];
+				put_pxl_to_image(j, i, frame, get_palette(aa % 16));
+			}
+			else if (frame->color_mode == 2)
+				put_pxl_to_image(j, i, frame, color_table[(int)(cc * (max-min)+min)]);
+			else if (frame->color_mode == 3)
+			{
+				int aa = frame->iterations_per_pixel[i][j];
+				if (cc < 0.7)
+					put_pxl_to_image(j, i, frame, get_palette(cc * 15));
+				else
+					put_pxl_to_image(j, i, frame, get_palette((aa*2) % 16));
+			}
+
 		}
 	}
 	prn_histogram(hist, frame->it_max);

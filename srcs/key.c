@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 17:59:42 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:30:07 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int	key_pressed(int keycode, t_mlx *frame)
 	}
 	else if (keycode == KEY_Z)
 		frame->zoom_mode ^= 1;
+	else if (keycode == KEY_C)
+	{
+		frame->color_mode = (frame->color_mode + 1) % 4;
+		map_colors(frame);
+		img_to_window(frame);
+	}
+
 
 	return (0);
 }
