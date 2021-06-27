@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 18:00:17 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:39:57 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ if (btn == MOUSE_LCLICK)
 
 int	mouse_release(int btn, int click_x, int click_y, t_mlx *frame)
 {
-if (btn == MOUSE_LCLICK)
-{
-printf("release: %d %d\n", click_x, click_y);
-	int dx = click_x - frame->move_from.x;
-	int dy = click_y - frame->move_from.y;
-	frame->lbtn_pressed = 0;
-	frame->center.x = frame->move_from_vp.x - (int)(click_x - frame->move_from.x) / frame->scale;
-	frame->center.y = frame->move_from_vp.y + (int)(click_y - frame->move_from.y) / frame->scale;
-	frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
-	frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
+	if (btn == MOUSE_LCLICK && frame->lbtn_pressed)
+	{
+		printf("release: %d %d\n", click_x, click_y);
+		int dx = click_x - frame->move_from.x;
+		int dy = click_y - frame->move_from.y;
+		frame->lbtn_pressed = 0;
+		frame->center.x = frame->move_from_vp.x - (int)(click_x - frame->move_from.x) / frame->scale;
+		frame->center.y = frame->move_from_vp.y + (int)(click_y - frame->move_from.y) / frame->scale;
+		frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
+		frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
 		render(frame);
+	}
 	return (0);
-}
 }
 
 int	mouse_move(int click_x, int click_y, t_mlx *frame)

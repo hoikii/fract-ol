@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 20:17:24 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:35:34 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,6 @@ void prn_histogram(int *histogram, int it_max)
 	for (int q=0; q<=6; q++)
 		max += hist[q];
 	max += hist[10];
-	printf("\ntotal: %d\n0to6: %.1f%%\n", total, max / (double)total * 100);
+	printf("\ntotal: %lld\n0to6: %.1f%%\n", total, max / (double)total * 100);
 
 }

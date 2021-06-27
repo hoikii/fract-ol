@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:38:51 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/21 17:10:56 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:35:52 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	*render_per_thread(void *arg)
 		img_to_window(frame);
 	}
 //	img_to_window(frame);
+	pthread_exit(NULL);
 }
 
 void render_thread(t_mlx *frame)
