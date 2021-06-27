@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/21 18:10:54 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 17:04:29 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	init_frame(t_mlx *frame)
 ** VisibilityChangeMask (1L<<16)
 */
 
-#ifdef LINUX
 
 #define BUTTONPRESS 4
 #define BUTTONPRESSMASK 1L<<2
@@ -69,6 +68,7 @@ static void	init_frame(t_mlx *frame)
 #define POINTERMOTIONMASK 1L<<6
 #define BUTTON1MOTIONMASK 1L<<8
 
+#ifdef LINUX
 
 static void	init_mlx_hook(t_mlx *frame)
 {
@@ -87,7 +87,10 @@ static void	init_mlx_hook(t_mlx *frame)
 {
 	mlx_hook(frame->win, DESTROYNOTIFY, STRUCTURENOTIFYMASK, close_win, frame);
 	mlx_hook(frame->win, KEYPRESS, 1L, key_pressed, frame);
-	mlx_mouse_hook(frame->win, mouse_hook, frame);
+//	mlx_mouse_hook(frame->win, mouse_hook, frame);
+	mlx_hook(frame->win, BUTTONPRESS, BUTTONPRESSMASK, mouse_press, frame);
+	mlx_hook(frame->win, BUTTONRELEASE, BUTTONRELEASEMASK, mouse_release, frame);
+	mlx_hook(frame->win, MOTIONNOTIFY, BUTTON1MOTIONMASK, mouse_move, frame);
 }
 
 #endif

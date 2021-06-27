@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/21 16:36:20 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 17:05:27 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "frame.h"
 #include "../libft/libft.h"
 #include <stdio.h>
+
+void prn_histogram(int *histogram, int it_max);
 
 static void	put_info(t_mlx *frame)
 {

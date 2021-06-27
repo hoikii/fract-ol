@@ -24,8 +24,9 @@ ifeq ($(UNAME),Darwin)
 	CFLAGS		+= -D MACOS
 	LIBMLXDIR	= minilibx
 	LIBMLXNAME	= mlx
-	LIBMLXFILE	= libmlx.dylib
+	LIBMLXFILE	= libmlx.a
 	LDLIBS		= -L$(LIBFTDIR) -l$(LIBFTNAME) -L$(LIBMLXDIR) -l$(LIBMLXNAME)
+	LDLIBS		+= -framework OpenGL -framework AppKit
 #	CFLAGS		+= -D THREADS_CNT=$(shell sysctl -n hw.ncpu)
 else
 	CFLAGS		+= -D LINUX
@@ -51,7 +52,7 @@ $(NAME): $(OBJS) srcs/frame.h
 	@$(MAKE) bonus -C libft
 	@echo "$(CCBLUE) >>> make minilibx (warning suppressed) <<< $(CCEND)"
 	@$(MAKE) -C $(LIBMLXDIR) 2> /dev/null
-	cp $(LIBMLXDIR)/$(LIBMLXFILE) ./
+#	cp $(LIBMLXDIR)/$(LIBMLXFILE) ./
 	@echo "$(CCBLUE) >>> linking obj files.  <<< $(CCEND)"
 	$(CC) $(OBJS) $(CFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(CCBLUE_BOLD) >>> make $(NAME) done!  <<< $(CCEND)"
@@ -70,8 +71,8 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: cleanlib clean
-	@echo "$(CCBLUE) >>> clean minilibx library file <<< $(CCEND)"
-	$(RM) $(LIBMLXFILE)
+#	@echo "$(CCBLUE) >>> clean minilibx library file <<< $(CCEND)"
+#	$(RM) $(LIBMLXFILE)
 	@echo "$(CCBLUE) >>> clean main project's executable. <<< $(CCEND)"
 	$(RM) $(NAME)
 
