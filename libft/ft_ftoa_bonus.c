@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 16:07:39 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/05 02:47:50 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:16:55 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int			intlen(long double n)
 	return (ret);
 }
 
-static long long	ft_pow(int x, int y)
+static long double	ft_pow(int x, int y)
 {
-	long long	ret;
+	long double	ret;
 
 	ret = 1;
 	while (y-- > 0)
