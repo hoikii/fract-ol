@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/15 00:49:34 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 17:59:42 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	key_pressed(int keycode, t_mlx *frame)
 		frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
 		render(frame);
 	}
+	else if (keycode == KEY_Z)
+		frame->zoom_mode ^= 1;
 
 	return (0);
 }

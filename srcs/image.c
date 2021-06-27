@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 17:05:27 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 17:55:29 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static void	put_info(t_mlx *frame)
 			   " <= x <= ");
 	msg = ft_strjoin(msg, ft_ftoa(frame->center.x + IMG_WIDTH / frame->scale / 2, 6));
 	mlx_string_put(frame->mlx, frame->win, 10, 80, 0x00ffffff, msg);
+	if (frame->zoom_mode)
+		mlx_string_put(frame->mlx, frame->win, 10, 100, 0x00ffffff, "zoom mode: follow mouse position");
+	else
+		mlx_string_put(frame->mlx, frame->win, 10, 100, 0x00ffffff, "zoom mode: fixed");
+
 	free(msg);
 }
 

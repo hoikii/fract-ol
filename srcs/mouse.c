@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/08 01:53:05 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/27 18:00:17 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ if (btn == MOUSE_LCLICK)
 	{
 		if (btn == MOUSE_WHEELDOWN)
 		{
-			frame->center.x = frame->upperleft.x + (click_x - MENU_WIDTH) / frame->scale;
-			frame->center.y = frame->upperleft.y - click_y / frame->scale;
 			frame->scale *= 1.1;
+			if (frame->zoom_mode)
+			{
+				frame->center.x = frame->upperleft.x + (click_x - MENU_WIDTH) / frame->scale;
+				frame->center.y = frame->upperleft.y - click_y / frame->scale;
+			}
 		}
 		else
 			frame->scale *= 0.9;
