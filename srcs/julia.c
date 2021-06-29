@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:40:57 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/07 19:03:44 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 14:13:50 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	julia_calc(int screen_x, int screen_y, t_mlx *frame)
 	vp.real = frame->upperleft.x + screen_x / frame->scale;
 	vp.imag = frame->upperleft.y - screen_y / frame->scale;
 	it = is_julia(vp, frame->it_max, frame->julia_constant);
+	frame->iterations_per_pixel[screen_y][screen_x] = it;
+	return ;
 	if (it)
 	{
 
