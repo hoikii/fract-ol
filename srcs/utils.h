@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.h                                       :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/29 16:25:24 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 23:05:21 by kanlee           ###   ########.fr       */
+/*   Created: 2021/06/29 23:00:27 by kanlee            #+#    #+#             */
+/*   Updated: 2021/06/29 23:01:10 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATH_UTILS_H
-# define MATH_UTILS_H
+#ifndef UTILS_H
+# define UTILS_H
 
-typedef struct s_complex {
-	double	real;
-	double	imag;
-}				t_complex;
-
-t_complex	c_add(t_complex c1, t_complex c2);
-t_complex	c_sub(t_complex c1, t_complex c2);
-t_complex	c_square(t_complex c1);
-double		c_abs_squared(t_complex c1);
-double	clamp(double d, double min, double max);
-int	clamp_i(int x, int min, int max);
-
+void zoom(t_mlx *frame);
+void dezoom(t_mlx *frame);
 
 #endif

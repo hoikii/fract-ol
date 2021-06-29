@@ -6,18 +6,18 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 20:30:07 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 23:03:34 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frame.h"
 #include "key.h"
+#include "utils.h"
 #include <stdio.h>
 #include <math.h>
 
 int	key_pressed(int keycode, t_mlx *frame)
 {
-//	printf("key=%d\n", keycode);
 	if (keycode == KEY_ESC)
 		close_win(frame);
 	else if (keycode == KEY_COMMA || keycode == KEY_PERIOD)
@@ -34,16 +34,9 @@ int	key_pressed(int keycode, t_mlx *frame)
 			|| keycode == KEY_MINUS || keycode == KEY_NP_MINUS)
 	{
 		if (keycode == KEY_PLUS || keycode == KEY_NP_PLUS)
-		{			frame->scale *= 1.1;
-//			frame->it_max = pow(1.6, log(frame->scale/200)/log(6)) * 50;
-		}
+			zoom(frame);
 		else
-		{
-			frame->scale *= 0.9;
-//			frame->it_max = pow(1.6, log(frame->scale/200)/log(6)) * 50;
-		}
-		frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
-		frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
+			dezoom(frame);
 		render(frame);
 	}
 	else if (keycode == KEY_Z)
@@ -54,8 +47,5 @@ int	key_pressed(int keycode, t_mlx *frame)
 		map_colors(frame);
 		img_to_window(frame);
 	}
-
-
 	return (0);
 }
-

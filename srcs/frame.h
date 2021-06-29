@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 19:30:37 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 23:06:08 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,4 @@ void	mandelbrot_calc(int x, int y, t_mlx *frame);
 void	julia_calc(int x, int y, t_mlx *frame);
 void	koch_calc(t_mlx *frame);
 void	map_colors(t_mlx *frame);
-double	clamp(double, double, double);
 #endif

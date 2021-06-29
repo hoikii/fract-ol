@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 16:24:43 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 17:02:42 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 23:06:00 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,13 @@ double	clamp(double d, double min, double max)
 		d = max;
 	return (d);
 }
+
+int	clamp_i(int x, int min, int max)
+{
+	if (x < min)
+		return (min);
+	if (x > max)
+		return (max);
+	return (x);
+}
+
