@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 17:58:35 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:10:26 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,17 @@ static void	put_info(t_mlx *frame)
 	else
 		msg = "zoom mode: fixed";
 	mlx_string_put(frame->mlx, frame->win, 10, 120, 0x00ffffff, msg);
+	mlx_string_put(frame->mlx, frame->win, 10, 160, 0x00ffffff, "julia constant");
+	tmp = ft_ftoa(frame->julia_constant.real , 5);
+	msg = ft_strjoin("real part = ", tmp);
+	mlx_string_put(frame->mlx, frame->win, 10, 175, 0x00ffffff, msg);
+	free(tmp);
+	free(msg);
+	tmp = ft_ftoa(frame->julia_constant.imag , 5);
+	msg = ft_strjoin("imaginary = ", tmp);
+	mlx_string_put(frame->mlx, frame->win, 10, 190, 0x00ffffff, msg);
+	free(tmp);
+	free(msg);
 
 //	free(msg);
 	if (frame->type == JULIASET)
@@ -185,10 +196,13 @@ color_table[q].b = rgb_start.b + (rgb_end.b - rgb_start.b) * (double)(q-min) / (
 			else if (frame->color_mode == 3)
 			{
 				int aa = frame->iterations_per_pixel[i][j];
-				if (cc < 0.7)
+				if (cc > 0.7)
 					put_pxl_to_image(j, i, frame, get_palette(cc * 15));
 				else
 					put_pxl_to_image(j, i, frame, get_palette((aa*2) % 16));
+				double quotient = cc;
+				put_pxl_to_image(j, i, frame, (t_color){0, quotient * 255, 0});
+
 			}
 
 		}

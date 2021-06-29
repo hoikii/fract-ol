@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/21 18:20:44 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:12:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int		is_mandelbrot(t_complex c, int it_max)
 	int			counter = 0;
 	int			counter_limit = 2;
 
-
 	zr_squared = 0;
 	zi_squared = 0;
 	it = -1;
@@ -92,10 +91,10 @@ void	mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
 
 	vp.real = frame->upperleft.x + screen_x / frame->scale;
 	vp.imag = frame->upperleft.y - screen_y / frame->scale;
-
 	it = is_mandelbrot(vp, frame->it_max);
 	frame->iterations_per_pixel[screen_y][screen_x] = it;
 	return ;
+
 	if (it != frame->it_max)
 	{
 //			if (it > 0)

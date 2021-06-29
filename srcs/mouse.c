@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 18:04:56 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 18:11:35 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mouse_press(int btn, int click_x, int click_y, t_mlx *frame)
 {
 	if (click_y <= 0)
 		return (0);
-	if (JULIA_CTL_PAD_LEFT < click_x && click_x < JULIA_CTL_PAD_LEFT + frame->julia_ctl_bg.width && JULIA_CTL_PAD_TOP < click_y && click_y < JULIA_CTL_PAD_TOP + frame->julia_ctl_bg.height)
+	if (btn == MOUSE_LCLICK && JULIA_CTL_PAD_LEFT < click_x && click_x < JULIA_CTL_PAD_LEFT + frame->julia_ctl_bg.width && JULIA_CTL_PAD_TOP < click_y && click_y < JULIA_CTL_PAD_TOP + frame->julia_ctl_bg.height)
 	{
 		frame->julia_ctl_clicked = 1;
 	int	bg_width;

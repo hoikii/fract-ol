@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 17:56:42 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 19:30:37 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@
 # define IMG_WIDTH 600
 # define IMG_HEIGHT 600
 # define MENU_WIDTH 200
-# define JULIA_CTL_PAD_TOP 150
+# define JULIA_CTL_PAD_TOP 200
 # define JULIA_CTL_PAD_LEFT 20
-# define JULIA_CONST_LIMIT 1.5
+# define JULIA_CONST_LIMIT 1
 
 typedef enum e_fractal_type {
 	MANDELBROT,
