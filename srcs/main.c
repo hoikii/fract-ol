@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 14:41:54 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:59:17 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ static void	init_frame(t_mlx *frame)
 //	frame->center = (t_point){-1.985528, 0};
 //	frame->center = (t_point){-1.996380, -0.000004};
 	frame->center = (t_point){-0.015439, 1.020888};
+
+	if (frame->type == JULIASET)
+	{
+		frame->center = (t_point){0, 0};
+		frame->scale = IMG_WIDTH / 3;
+		frame->it_max = 200;
+	}
 	frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
 	frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
 	frame->win = mlx_new_window(frame->mlx, IMG_WIDTH + MENU_WIDTH, IMG_HEIGHT, "fract-ol");
@@ -50,6 +57,7 @@ static void	init_frame(t_mlx *frame)
 	frame->lbtn_pressed = 0;
 	frame->zoom_mode = 0;
 	frame->color_mode = 0;
+	frame->julia_ctl_clicked = 0;
 }
 
 /*
@@ -117,7 +125,11 @@ int	set_fractal_type(t_mlx *frame, int ac, char **av)
 		frame->type = JULIASET;
 		frame->julia_constant = (t_complex){0.285, 0};
 		if (ac == 4)
+		{
 			frame->julia_constant = (t_complex){ft_atof(av[2]), ft_atof(av[3])};
+			frame->julia_constant.real = clamp(frame->julia_constant.real, -1 * JULIA_CONST_LIMIT, JULIA_CONST_LIMIT);
+			frame->julia_constant.imag = clamp(frame->julia_constant.imag, -1 * JULIA_CONST_LIMIT, JULIA_CONST_LIMIT);
+		}
 		else if (ac != 2)
 		{
 			printf("Julia set must have 0 or 2 double arguments.\n");
@@ -145,6 +157,21 @@ int	main(int ac, char **av)
 	}
 #endif
 	init_frame(&frame);
+	if (frame.type == JULIASET)
+	{
+		frame.julia_ctl_bg.img_ptr = mlx_xpm_file_to_image(frame.mlx,
+			"assets/julia_ctl_bg.xpm",
+			&frame.julia_ctl_bg.width, &frame.julia_ctl_bg.height);
+		frame.julia_ctl_bg.imgdata = mlx_get_data_addr(
+			frame.julia_ctl_bg.img_ptr, &frame.julia_ctl_bg.bpp,
+			&frame.julia_ctl_bg.size_line, &frame.julia_ctl_bg.endian);
+		frame.julia_ctl_btn.img_ptr = mlx_xpm_file_to_image(frame.mlx,
+			"assets/julia_ctl_btn.xpm",
+			&frame.julia_ctl_btn.width, &frame.julia_ctl_btn.height);
+		frame.julia_ctl_btn.imgdata = mlx_get_data_addr(
+			frame.julia_ctl_btn.img_ptr, &frame.julia_ctl_btn.bpp,
+			&frame.julia_ctl_btn.size_line, &frame.julia_ctl_btn.endian);
+	}
 	render(&frame);
 	init_mlx_hook(&frame);
 	mlx_loop(frame.mlx);

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 16:24:43 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 16:41:44 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:02:42 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,13 @@ t_complex	c_square(t_complex c1)
 double	c_abs_squared(t_complex c1)
 {
 	return (c1.real * c1.real + c1.imag * c1.imag);
+}
+
+double	clamp(double d, double min, double max)
+{
+	if (d < min)
+		d = min;
+	if (d > max)
+		d = max;
+	return (d);
 }

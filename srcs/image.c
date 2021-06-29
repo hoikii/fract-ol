@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 14:38:19 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:58:35 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,28 @@
 #include <stdio.h>
 
 void prn_histogram(int *histogram, int it_max);
+
+void	put_julia_constant_ctl(t_mlx *frame)
+{
+	int	bg_width;
+	int	bg_height;
+	int	btn_width;
+	int	btn_height;
+	t_point ctl_center;
+
+	bg_width = frame->julia_ctl_bg.width;
+	bg_height = frame->julia_ctl_bg.height;
+	ctl_center = (t_point){JULIA_CTL_PAD_LEFT + bg_width / 2,
+		JULIA_CTL_PAD_TOP + bg_height / 2};
+	btn_width = frame->julia_ctl_btn.width;
+	btn_height = frame->julia_ctl_btn.height;
+	mlx_put_image_to_window(frame->mlx, frame->win, frame->julia_ctl_bg.img_ptr,
+		JULIA_CTL_PAD_LEFT, JULIA_CTL_PAD_TOP);
+	mlx_put_image_to_window(frame->mlx, frame->win, frame->julia_ctl_btn.img_ptr,
+		ctl_center.x + frame->julia_constant.real / JULIA_CONST_LIMIT * bg_width / 2 - btn_width / 2,
+		ctl_center.y - frame->julia_constant.imag / JULIA_CONST_LIMIT * bg_height / 2 - btn_width / 2);
+	}
+
 
 static void	put_info(t_mlx *frame)
 {
@@ -58,6 +80,8 @@ static void	put_info(t_mlx *frame)
 	mlx_string_put(frame->mlx, frame->win, 10, 120, 0x00ffffff, msg);
 
 //	free(msg);
+	if (frame->type == JULIASET)
+		put_julia_constant_ctl(frame);
 }
 
 void	img_to_window(t_mlx *frame)

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 19:14:54 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:56:42 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define IMG_WIDTH 600
 # define IMG_HEIGHT 600
 # define MENU_WIDTH 200
+# define JULIA_CTL_PAD_TOP 150
+# define JULIA_CTL_PAD_LEFT 20
+# define JULIA_CONST_LIMIT 1.5
 
 typedef enum e_fractal_type {
 	MANDELBROT,
@@ -54,6 +57,8 @@ typedef struct s_img {
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct	s_mlx {
@@ -64,6 +69,8 @@ typedef struct	s_mlx {
 	t_img	img;
 	t_img	img_move;
 	t_img	menu;
+	t_img	julia_ctl_bg;
+	t_img	julia_ctl_btn;
 	t_fractal_type type;
 	t_point	upperleft;
 	t_point	center;
@@ -76,6 +83,7 @@ typedef struct	s_mlx {
 	int		color_mode;
 	t_point move_from;
 	t_point move_from_vp;
+	int julia_ctl_clicked;
 } t_mlx;
 
 typedef struct s_threads {
@@ -92,4 +100,5 @@ void	mandelbrot_calc(int x, int y, t_mlx *frame);
 void	julia_calc(int x, int y, t_mlx *frame);
 void	koch_calc(t_mlx *frame);
 void	map_colors(t_mlx *frame);
+double	clamp(double, double, double);
 #endif
