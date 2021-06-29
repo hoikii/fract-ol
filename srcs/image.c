@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 20:35:34 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/29 14:38:19 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,36 @@ void prn_histogram(int *histogram, int it_max);
 static void	put_info(t_mlx *frame)
 {
 	char *msg;
-
+	char *tmp;
 	mlx_put_image_to_window(frame->mlx, frame->win, frame->menu.img_ptr, 0, 0);
-	msg = ft_strjoin("max_iterations: ", ft_itoa(frame->it_max));
+	tmp = ft_itoa(frame->it_max);
+	msg = ft_strjoin("max_iterations: ", tmp);
 	mlx_string_put(frame->mlx, frame->win, 10, 20, 0x00ffffff, msg);
+	free(tmp);
 	free(msg);
-	msg = ft_strjoin("scale: ", ft_ftoa(frame->scale / (IMG_WIDTH / 3), 6));
+	tmp = ft_ftoa(frame->scale / (IMG_WIDTH / 3), 6);
+	msg = ft_strjoin("scale: ", tmp);
 	mlx_string_put(frame->mlx, frame->win, 10, 40, 0x00ffffff, msg);
+	free(tmp);
 	free(msg);
-	msg = ft_strjoin("1px = ", ft_ftoa(1/frame->scale, 22));
+	tmp = ft_ftoa(1/frame->scale, 16);
+	msg = ft_strjoin("1px = ", tmp);
 	mlx_string_put(frame->mlx, frame->win, 10, 60, 0x00ffffff, msg);
+	free(tmp);
 	free(msg);
 //	mlx_string_put(frame->mlx, frame->win, 10, 60, 0x00ffffff, "plot range");
 //	msg = ft_strjoin(ft_ftoa(frame->center.x - IMG_WIDTH / frame->scale / 2, 6),
 //			   " <= x <= ");
 //	msg = ft_strjoin(msg, ft_ftoa(frame->center.x + IMG_WIDTH / frame->scale / 2, 6));
-	msg = ft_strjoin("center x: ", ft_ftoa(frame->center.x, 12));
+	tmp = ft_ftoa(frame->center.x, 12);
+	msg = ft_strjoin("center x: ", tmp);
 	mlx_string_put(frame->mlx, frame->win, 10, 80, 0x00ffffff, msg);
+	free(tmp);
 	free(msg);
-	msg = ft_strjoin("center y: ", ft_ftoa(frame->center.y, 12));
+	tmp = ft_ftoa(frame->center.x, 12);
+	msg = ft_strjoin("center y: ", tmp);
 	mlx_string_put(frame->mlx, frame->win, 10, 100, 0x00ffffff, msg);
+	free(tmp);
 	free(msg);
 	if (frame->zoom_mode)
 		msg = "zoom mode: follow mouse position";
@@ -163,6 +173,7 @@ color_table[q].b = rgb_start.b + (rgb_end.b - rgb_start.b) * (double)(q-min) / (
 printf("cneter = %lf, %lf\n", frame->center.x, frame->center.y);
 	free(histogram);
 	free(color_table);
+	free(hist);
 }
 
 void prn_histogram(int *histogram, int it_max)

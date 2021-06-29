@@ -43,7 +43,7 @@ CCBLUE		= \033[34m
 CCBLUE_BOLD	= \033[1;34m
 CCEND		= \033[0m
 
-.PHONY: all bonus cleanlib clean fclean re
+.PHONY: all bonus leaktest cleanlib clean fclean re
 
 all: $(NAME)
 
@@ -59,6 +59,9 @@ $(NAME): $(OBJS) srcs/frame.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+leaktest: CFLAGS += -g3 -fsanitize=address
+leaktest: clean all
 
 cleanlib:
 	@echo "$(CCBLUE) >>> clean libft <<< $(CCEND)"
