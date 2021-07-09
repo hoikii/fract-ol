@@ -17,7 +17,7 @@ OBJS		= $(SRCS:.c=.o)
 LIBFTDIR	= libft
 LIBFTNAME	= ft
 CC			= gcc
-#CFLAGS		= -Wall -Wextra
+CFLAGS		= -Wall -Wextra
 RM			= rm -rf
 
 UNAME		:= $(shell uname)

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/01 22:20:59 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 17:29:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,6 @@ int				is_mandelbrot(t_complex c, int it_max)
 void			mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
 {
 	t_complex	vp;
-	char		*imgdata;
-	t_color		rgb;
-	int			pos;
 	int			it;
 
 	vp.real = frame->upperleft.x + screen_x / frame->scale;

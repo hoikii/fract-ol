@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/04 21:11:09 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 17:25:52 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ static void	init_mlx_hook(t_mlx *frame)
 
 int			close_win(t_mlx *param)
 {
-	int	i;
-
 	if (param->win)
 		mlx_destroy_window(param->mlx, param->win);
 	mlx_destroy_image(param->mlx, param->img.img_ptr);

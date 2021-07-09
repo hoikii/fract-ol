@@ -6,12 +6,12 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 22:57:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 23:06:29 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 17:23:39 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
-#include "math_utils.h"
+#include "utils.h"
 
 int		rgb_to_int(t_color rgb)
 {

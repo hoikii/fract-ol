@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:14:40 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 17:28:52 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	put_julia_constant_ctl(t_mlx *frame)
 	int		bg_width;
 	int		bg_height;
 	int		btn_width;
-	int		btn_height;
 	t_point	ctl_center;
 
 	bg_width = frame->julia_ctl_bg.width;
@@ -30,7 +29,6 @@ static void	put_julia_constant_ctl(t_mlx *frame)
 	ctl_center = (t_point){JULIA_CTL_PAD_LEFT + bg_width / 2,
 		JULIA_CTL_PAD_TOP + bg_height / 2};
 	btn_width = frame->julia_ctl_btn.width;
-	btn_height = frame->julia_ctl_btn.height;
 	mlx_put_image_to_window(frame->mlx, frame->win, frame->julia_ctl_bg.img_ptr,
 		JULIA_CTL_PAD_LEFT, JULIA_CTL_PAD_TOP);
 	mlx_put_image_to_window(frame->mlx, frame->win,

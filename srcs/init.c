@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/04 21:09:08 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 17:27:21 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "utils.h"
 #include "../libft/libft.h"
 
-static int	julia_init(t_mlx *frame, int ac, char **av)
+static void	julia_init(t_mlx *frame, int ac, char **av)
 {
 	frame->type = JULIASET;
 	frame->julia_constant = (t_complex){0.285, 0};
@@ -67,7 +67,7 @@ int			set_fractal_type(t_mlx *frame, int ac, char **av)
 	return (1);
 }
 
-static int	load_julia_ctl_pad(t_mlx *frame)
+static void load_julia_ctl_pad(t_mlx *frame)
 {
 	frame->julia_ctl_bg.img_ptr = mlx_xpm_file_to_image(frame->mlx,
 		"assets/julia_ctl_bg.xpm",
