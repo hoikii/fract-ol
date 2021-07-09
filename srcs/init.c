@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:27:21 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:49:08 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	julia_init(t_mlx *frame, int ac, char **av)
 	{
 		frame->julia_constant = (t_complex){ft_atof(av[2]), ft_atof(av[3])};
 		frame->julia_constant.real = clamp(frame->julia_constant.real,
-			-1 * JULIA_CONST_LIMIT, JULIA_CONST_LIMIT);
+				-1 * JULIA_CONST_LIMIT, JULIA_CONST_LIMIT);
 		frame->julia_constant.imag = clamp(frame->julia_constant.imag,
-			-1 * JULIA_CONST_LIMIT, JULIA_CONST_LIMIT);
+				-1 * JULIA_CONST_LIMIT, JULIA_CONST_LIMIT);
 	}
 	else if (ac != 2)
 	{
@@ -41,7 +41,7 @@ static void	julia_init(t_mlx *frame, int ac, char **av)
 	frame->it_max = 200;
 }
 
-int			set_fractal_type(t_mlx *frame, int ac, char **av)
+int	set_fractal_type(t_mlx *frame, int ac, char **av)
 {
 	frame->center = (t_point){-0.5, 0};
 	frame->scale = IMG_WIDTH / 3;
@@ -67,33 +67,33 @@ int			set_fractal_type(t_mlx *frame, int ac, char **av)
 	return (1);
 }
 
-static void load_julia_ctl_pad(t_mlx *frame)
+static void	load_julia_ctl_pad(t_mlx *frame)
 {
 	frame->julia_ctl_bg.img_ptr = mlx_xpm_file_to_image(frame->mlx,
-		"assets/julia_ctl_bg.xpm",
-		&frame->julia_ctl_bg.width, &frame->julia_ctl_bg.height);
+			"assets/julia_ctl_bg.xpm",
+			&frame->julia_ctl_bg.width, &frame->julia_ctl_bg.height);
 	if (!frame->julia_ctl_bg.img_ptr)
 	{
 		printf("cannot load assets/julia_ctl_bg.xpm\n");
 		exit(-1);
 	}
 	frame->julia_ctl_btn.img_ptr = mlx_xpm_file_to_image(frame->mlx,
-		"assets/julia_ctl_btn.xpm",
-		&frame->julia_ctl_btn.width, &frame->julia_ctl_btn.height);
+			"assets/julia_ctl_btn.xpm",
+			&frame->julia_ctl_btn.width, &frame->julia_ctl_btn.height);
 	if (!frame->julia_ctl_btn.img_ptr)
 	{
 		printf("cannot load assets/julia_ctl_btn.xpm\n");
 		exit(-1);
 	}
 	frame->julia_ctl_bg.imgdata = mlx_get_data_addr(
-		frame->julia_ctl_bg.img_ptr, &frame->julia_ctl_bg.bpp,
-		&frame->julia_ctl_bg.size_line, &frame->julia_ctl_bg.endian);
+			frame->julia_ctl_bg.img_ptr, &frame->julia_ctl_bg.bpp,
+			&frame->julia_ctl_bg.size_line, &frame->julia_ctl_bg.endian);
 	frame->julia_ctl_btn.imgdata = mlx_get_data_addr(
-		frame->julia_ctl_btn.img_ptr, &frame->julia_ctl_btn.bpp,
-		&frame->julia_ctl_btn.size_line, &frame->julia_ctl_btn.endian);
+			frame->julia_ctl_btn.img_ptr, &frame->julia_ctl_btn.bpp,
+			&frame->julia_ctl_btn.size_line, &frame->julia_ctl_btn.endian);
 }
 
-void		init_frame(t_mlx *frame)
+void	init_frame(t_mlx *frame)
 {
 	frame->mlx = mlx_init();
 	frame->upperleft.x = -2.0;
@@ -101,7 +101,7 @@ void		init_frame(t_mlx *frame)
 	frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
 	frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;
 	frame->win = mlx_new_window(frame->mlx, IMG_WIDTH + MENU_WIDTH, IMG_HEIGHT,
-		"fract-ol");
+			"fract-ol");
 	frame->img.img_ptr = mlx_new_image(frame->mlx, IMG_WIDTH, IMG_HEIGHT);
 	frame->img.imgdata = mlx_get_data_addr(frame->img.img_ptr,
 			&frame->img.bpp, &frame->img.size_line, &frame->img.endian);
@@ -110,7 +110,8 @@ void		init_frame(t_mlx *frame)
 			&frame->menu.bpp, &frame->menu.size_line, &frame->menu.endian);
 	frame->img_move.img_ptr = mlx_new_image(frame->mlx, IMG_WIDTH, IMG_HEIGHT);
 	frame->img_move.imgdata = mlx_get_data_addr(frame->img_move.img_ptr,
-			&frame->img_move.bpp, &frame->img_move.size_line, &frame->img_move.endian);
+			&frame->img_move.bpp, &frame->img_move.size_line,
+			&frame->img_move.endian);
 	frame->lbtn_pressed = 0;
 	frame->zoom_mode = 0;
 	frame->color_mode = 0;

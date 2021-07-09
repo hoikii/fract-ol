@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:28:52 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:46:26 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	put_info(t_mlx *frame)
 		put_julia_constant_ctl(frame);
 }
 
-int		img_to_window(t_mlx *frame)
+int	img_to_window(t_mlx *frame)
 {
 	if (frame->lbtn_pressed)
 		mlx_put_image_to_window(frame->mlx, frame->win,
@@ -129,21 +129,21 @@ void	calc_histogram(t_mlx *frame, int *histogram, t_color *color_table)
 	i = -1;
 	while (++i < it_range)
 	{
-		color_table[i + frame->min_it].r = rgb_start.r +
-			(rgb_end.r - rgb_start.r) * (double)(i) / (it_range);
-		color_table[i + frame->min_it].g = rgb_start.g +
-			(rgb_end.g - rgb_start.g) * (double)(i) / (it_range);
-		color_table[i + frame->min_it].b = rgb_start.b +
-			(rgb_end.b - rgb_start.b) * (double)(i) / (it_range);
+		color_table[i + frame->min_it].r = rgb_start.r
+			+ (rgb_end.r - rgb_start.r) * (double)(i) / (it_range);
+		color_table[i + frame->min_it].g = rgb_start.g
+			+ (rgb_end.g - rgb_start.g) * (double)(i) / (it_range);
+		color_table[i + frame->min_it].b = rgb_start.b
+			+ (rgb_end.b - rgb_start.b) * (double)(i) / (it_range);
 	}
 }
 
 void	coloring(int i, int j, t_mlx *frame, int *histogram, t_color *color_table, long long total_iterations)
 {
-	double cc;
-	unsigned int min;
-	int max;
-	int aa;
+	double			cc;
+	unsigned int	min;
+	int				max;
+	int				aa;
 
 	min = frame->min_it;
 	max = frame->max_it;
@@ -170,10 +170,11 @@ void	coloring(int i, int j, t_mlx *frame, int *histogram, t_color *color_table, 
 
 void	map_colors(t_mlx *frame)
 {
-	int		*histogram;
+	int			*histogram;
 	long long	total_iterations;
-	int i, j;
-	t_color	*color_table;
+	int			i;
+	int			j;
+	t_color		*color_table;
 
 	histogram = malloc(sizeof(int) * (frame->it_max + 1));
 	if (!histogram)

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:32:56 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:39:33 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include "mouse.h"
 #include "utils.h"
 
-int		mouse_press2(int btn, int click_x, int click_y, t_mlx *frame)
+int	mouse_press2(int btn, int click_x, int click_y, t_mlx *frame)
 {
 	if (btn == MOUSE_WHEELDOWN)
 	{
 		if (frame->zoom_mode)
 		{
-			frame->center.x =
-				frame->upperleft.x + (click_x - MENU_WIDTH) / frame->scale;
+			frame->center.x
+				= frame->upperleft.x + (click_x - MENU_WIDTH) / frame->scale;
 			frame->center.y = frame->upperleft.y - click_y / frame->scale;
 		}
 		zoom(frame);
@@ -33,7 +33,7 @@ int		mouse_press2(int btn, int click_x, int click_y, t_mlx *frame)
 	return (0);
 }
 
-int		mouse_press(int btn, int click_x, int click_y, t_mlx *frame)
+int	mouse_press(int btn, int click_x, int click_y, t_mlx *frame)
 {
 	if (click_y <= 0)
 		return (0);
@@ -54,7 +54,7 @@ int		mouse_press(int btn, int click_x, int click_y, t_mlx *frame)
 	return (mouse_press2(btn, click_x, click_y, frame));
 }
 
-int		mouse_release(int btn, int click_x, int click_y, t_mlx *frame)
+int	mouse_release(int btn, int click_x, int click_y, t_mlx *frame)
 {
 	int	dx;
 	int	dy;
@@ -133,14 +133,14 @@ void	move_image(int click_x, int click_y, t_mlx *frame)
 	return ;
 }
 
-int		mouse_move(int click_x, int click_y, t_mlx *frame)
+int	mouse_move(int click_x, int click_y, t_mlx *frame)
 {
 	if (frame->julia_ctl_clicked)
 	{
-		click_x = clamp(click_x,
-			JULIA_CTL_PAD_LEFT, JULIA_CTL_PAD_LEFT + frame->julia_ctl_bg.width);
-		click_y = clamp(click_y,
-			JULIA_CTL_PAD_TOP, JULIA_CTL_PAD_TOP + frame->julia_ctl_bg.height);
+		click_x = clamp(click_x, JULIA_CTL_PAD_LEFT,
+				JULIA_CTL_PAD_LEFT + frame->julia_ctl_bg.width);
+		click_y = clamp(click_y, JULIA_CTL_PAD_TOP,
+				JULIA_CTL_PAD_TOP + frame->julia_ctl_bg.height);
 		return (update_julia_constant(click_x, click_y, frame));
 	}
 	move_image(click_x, click_y, frame);

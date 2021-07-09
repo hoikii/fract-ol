@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/04 03:14:40 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:36:49 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	update_julia_constant(int click_x, int click_y, t_mlx *frame)
 	bg_height = frame->julia_ctl_bg.height;
 	ctl_center = (t_point){JULIA_CTL_PAD_LEFT + bg_width / 2,
 		JULIA_CTL_PAD_TOP + bg_height / 2};
-	frame->julia_constant.real =
-		(click_x - ctl_center.x) / (bg_width / 2) * JULIA_CONST_LIMIT;
-	frame->julia_constant.imag =
-		(ctl_center.y - click_y) / (bg_height / 2) * JULIA_CONST_LIMIT;
+	frame->julia_constant.real
+		= (click_x - ctl_center.x) / (bg_width / 2) * JULIA_CONST_LIMIT;
+	frame->julia_constant.imag
+		= (ctl_center.y - click_y) / (bg_height / 2) * JULIA_CONST_LIMIT;
 	render(frame);
 	return (0);
 }

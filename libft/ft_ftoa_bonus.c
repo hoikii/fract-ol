@@ -6,14 +6,14 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 16:07:39 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/27 20:16:55 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:32:18 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int			intlen(long double n)
+static int	intlen(long double n)
 {
 	int	ret;
 
@@ -43,7 +43,7 @@ static long double	ft_pow(int x, int y)
 	return (ret);
 }
 
-static void			fill_fraction(char *str, long double n, int precision)
+static void	fill_fraction(char *str, long double n, int precision)
 {
 	int		carry_flag;
 	char	ch;
@@ -65,7 +65,7 @@ static void			fill_fraction(char *str, long double n, int precision)
 	}
 }
 
-static void			fill_integer(char *str, long double n, int ilen)
+static void	fill_integer(char *str, long double n, int ilen)
 {
 	char	ch;
 
@@ -79,7 +79,7 @@ static void			fill_integer(char *str, long double n, int ilen)
 	}
 }
 
-char				*ft_ftoa(long double n, int precision)
+char	*ft_ftoa(long double n, int precision)
 {
 	int			ilen;
 	char		*ret;

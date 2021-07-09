@@ -6,18 +6,18 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 22:57:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:23:39 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:44:35 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "utils.h"
 
-int		rgb_to_int(t_color rgb)
+int	rgb_to_int(t_color rgb)
 {
 	int	r;
-	int g;
-	int b;
+	int	g;
+	int	b;
 
 	r = clamp_i(rgb.r, 0, 255);
 	g = clamp_i(rgb.g, 0, 255);
@@ -27,7 +27,7 @@ int		rgb_to_int(t_color rgb)
 
 t_color	get_palette(int i)
 {
-	t_color palette[16];
+	t_color	palette[16];
 
 	palette[0] = (t_color){66, 30, 15};
 	palette[1] = (t_color){25, 7, 26};

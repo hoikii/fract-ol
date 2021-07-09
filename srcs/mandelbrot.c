@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:29:24 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:38:11 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define ZERO 0.0000000001
 
-typedef struct	s_counter {
+typedef struct s_counter {
 	t_complex	z_old;
 	int			counter;
 	int			counter_limit;
@@ -50,7 +50,7 @@ typedef struct	s_counter {
 **}
 */
 
-static int		detect_cycle(t_complex z, t_counter *counter)
+static int	detect_cycle(t_complex z, t_counter *counter)
 {
 	if (fabs(z.real - counter->z_old.real) < ZERO
 		&& fabs(z.imag - counter->z_old.imag) < ZERO)
@@ -65,7 +65,7 @@ static int		detect_cycle(t_complex z, t_counter *counter)
 	return (0);
 }
 
-int				is_mandelbrot(t_complex c, int it_max)
+int	is_mandelbrot(t_complex c, int it_max)
 {
 	t_complex	z;
 	int			it;
@@ -94,7 +94,7 @@ int				is_mandelbrot(t_complex c, int it_max)
 	return (it);
 }
 
-void			mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
+void	mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
 {
 	t_complex	vp;
 	int			it;

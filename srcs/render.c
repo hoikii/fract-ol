@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:38:51 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/01 23:43:57 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:37:35 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 static void	render_single(t_mlx *frame)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < IMG_HEIGHT)
@@ -49,7 +49,7 @@ static void	*render_per_thread(void *arg)
 	while (++i < IMG_HEIGHT)
 	{
 		if (i % THREADS_CNT != tid)
-			continue;
+			continue ;
 		j = -1;
 		while (++j < IMG_WIDTH)
 		{
@@ -82,7 +82,7 @@ static void	render_multithread(t_mlx *frame)
 		pthread_join(threads[i], NULL);
 }
 
-void		render(t_mlx *frame)
+void	render(t_mlx *frame)
 {
 	if (BONUS != 1 || THREADS_CNT <= 1)
 		render_single(frame);
@@ -94,7 +94,7 @@ void		render(t_mlx *frame)
 
 #else
 
-void		render(t_mlx *frame)
+void	render(t_mlx *frame)
 {
 	render_single(frame);
 	map_colors(frame);

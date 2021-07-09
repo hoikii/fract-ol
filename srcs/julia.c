@@ -6,13 +6,13 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:40:57 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:31:57 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:52:13 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frame.h"
 
-int		is_julia(t_complex z, int it_max, t_complex c)
+int	is_julia(t_complex z, int it_max, t_complex c)
 {
 	int			it;
 

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 16:24:43 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/30 18:18:52 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:38:31 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ t_complex	c_sub(t_complex c1, t_complex c2)
 
 t_complex	c_square(t_complex c1)
 {
-	t_complex c;
+	t_complex	c;
 
 	c.real = c1.real * c1.real - c1.imag * c1.imag;
 	c.imag = 2 * c1.real * c1.imag;
 	return (c);
 }
 
-double		c_abs_squared(t_complex c1)
+double	c_abs_squared(t_complex c1)
 {
 	return (c1.real * c1.real + c1.imag * c1.imag);
 }

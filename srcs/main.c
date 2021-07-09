@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 17:25:52 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:41:09 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	init_mlx_hook(t_mlx *frame)
 
 #endif
 
-int			close_win(t_mlx *param)
+int	close_win(t_mlx *param)
 {
 	if (param->win)
 		mlx_destroy_window(param->mlx, param->win);
@@ -73,9 +73,9 @@ int			close_win(t_mlx *param)
 	exit(0);
 }
 
-int			main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_mlx frame;
+	t_mlx	frame;
 
 	if (ac < 2 || set_fractal_type(&frame, ac, av) <= 0)
 	{

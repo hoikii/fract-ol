@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 15:44:04 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/09 18:35:18 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@
 # define JULIA_CTL_PAD_LEFT 20
 # define JULIA_CONST_LIMIT 1
 
-typedef enum	e_fractal_type {
+typedef enum e_fractal_type {
 	MANDELBROT,
 	JULIASET,
 	KOCH_SNOWFLAKE
 }				t_fractal_type;
 
-typedef struct	s_point {
+typedef struct s_point {
 	double	x;
 	double	y;
 }				t_point;
 
-typedef struct	s_img {
+typedef struct s_img {
 	void	*img_ptr;
 	char	*imgdata;
 	int		bpp;
@@ -61,7 +61,7 @@ typedef struct	s_img {
 	int		height;
 }				t_img;
 
-typedef struct	s_mlx {
+typedef struct s_mlx {
 	void			*mlx;
 	void			*win;
 	int				width;
@@ -88,20 +88,20 @@ typedef struct	s_mlx {
 	int				julia_ctl_clicked;
 }				t_mlx;
 
-typedef struct	s_threads {
+typedef struct s_threads {
 	int		tid;
 	t_mlx	*frame;
 }				t_threads;
 
-int				set_fractal_type(t_mlx *frame, int ac, char **av);
-void			init_frame(t_mlx *frame);
-int				close_win(t_mlx *param);
-void			fractal_calc(t_mlx frame);
-void			put_pxl_to_image(int x, int y, t_mlx *frame, t_color rgb);
-int				img_to_window(t_mlx *frame);
-void			render(t_mlx *frame);
-void			mandelbrot_calc(int x, int y, t_mlx *frame);
-void			julia_calc(int x, int y, t_mlx *frame);
-void			map_colors(t_mlx *frame);
+int		set_fractal_type(t_mlx *frame, int ac, char **av);
+void	init_frame(t_mlx *frame);
+int		close_win(t_mlx *param);
+void	fractal_calc(t_mlx frame);
+void	put_pxl_to_image(int x, int y, t_mlx *frame, t_color rgb);
+int		img_to_window(t_mlx *frame);
+void	render(t_mlx *frame);
+void	mandelbrot_calc(int x, int y, t_mlx *frame);
+void	julia_calc(int x, int y, t_mlx *frame);
+void	map_colors(t_mlx *frame);
 
 #endif
