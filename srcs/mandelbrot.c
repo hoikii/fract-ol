@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 20:12:24 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/07/01 22:20:59 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,70 @@
 
 #define ZERO 0.0000000001
 
-/* With unoptimized version, We need five multiplications per each iterations.
- * (three for znext = z^2 + c, two for checking escape condition)
- * This can be reduced to three by caching (z.real)^2 and (z.imaginary)^2.
- *
- * znext.real = (z.real)^2 - (z.imag)^2 + c.real
- * znext.imag = 2 * z.real * z.imag + c.imag
- * escape if |znext|^2 = (z.real)^2 + (z.imag)^2 >= 2^2
+typedef struct	s_counter {
+	t_complex	z_old;
+	int			counter;
+	int			counter_limit;
+}				t_counter;
+
+/*
+** With unoptimized version, We need five multiplications per each iterations.
+** (three for znext = z^2 + c, two for checking escape condition)
+** This can be reduced to three by caching (z.real)^2 and (z.imaginary)^2.
+**
+** znext.real = (z.real)^2 - (z.imag)^2 + c.real
+** znext.imag = 2 * z.real * z.imag + c.imag
+** escape if |znext|^2 = (z.real)^2 + (z.imag)^2 >= 2^2
 */
 
-#if 0
-int		is_mandelbrot(t_complex p, int it_max)
-{
-	t_complex	z = {0, 0};
-	int			it;
+/*
+**int		is_mandelbrot(t_complex p, int it_max)
+**{
+**	t_complex	z;
+**	int			it;
+**
+**	z = (t_complex){0, 0};
+**	it = -1;
+**	while (++it < it_max)
+**	{
+**		z = c_add(c_square(z), p);
+**		if (c_abs_squared(z) >= 4.0)
+**			return (it);
+**	}
+**	return (0);
+**}
+*/
 
-	it = -1;
-	while (++it < it_max)
+static int		detect_cycle(t_complex z, t_counter *counter)
+{
+	if (fabs(z.real - counter->z_old.real) < ZERO
+		&& fabs(z.imag - counter->z_old.imag) < ZERO)
+		return (1);
+	if (counter->counter == counter->counter_limit)
 	{
-		z = c_add(c_square(z), p);
-		if (c_abs_squared(z) >= 4.0)
-			return (it);
+		counter->z_old = z;
+		counter->counter = 0;
+		counter->counter_limit *= 2;
 	}
+	counter->counter++;
 	return (0);
 }
-#else
 
-int		is_mandelbrot(t_complex c, int it_max)
+int				is_mandelbrot(t_complex c, int it_max)
 {
-	t_complex	z = {0, 0};
+	t_complex	z;
 	int			it;
 	double		zr_squared;
 	double		zi_squared;
-	t_complex	oldz = {0, 0};
-	int			counter = 0;
-	int			counter_limit = 2;
+	t_counter	counter;
 
+	z = (t_complex){0, 0};
 	zr_squared = 0;
 	zi_squared = 0;
 	it = -1;
+	counter.z_old = (t_complex){0, 0};
+	counter.counter = 0;
+	counter.counter_limit = 2;
 	while (++it < it_max)
 	{
 		z.imag = (z.real + z.real) * z.imag + c.imag;
@@ -63,52 +88,23 @@ int		is_mandelbrot(t_complex c, int it_max)
 		zi_squared = z.imag * z.imag;
 		if (zr_squared + zi_squared >= 4.0)
 			return (it);
-#if 1
-		if (fabs(z.real - oldz.real) < ZERO && fabs(z.imag - oldz.imag) < ZERO)
+		if (detect_cycle(z, &counter))
 			return (it_max);
-		if (counter == counter_limit)
-		{
-			oldz = z;
-			counter = 0;
-			counter_limit *= 2;
-		}
-		counter++;
-#endif
 	}
 	return (it);
 }
-#endif
 
-int cclamp(double n) { if (n < 0) n = 0; if (n > 255) n = 255; return n;}
-
-void	mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
+void			mandelbrot_calc(int screen_x, int screen_y, t_mlx *frame)
 {
-	t_complex vp;
-	char *imgdata;
-	t_color rgb;
-	int pos;
-	int it;
+	t_complex	vp;
+	char		*imgdata;
+	t_color		rgb;
+	int			pos;
+	int			it;
 
 	vp.real = frame->upperleft.x + screen_x / frame->scale;
 	vp.imag = frame->upperleft.y - screen_y / frame->scale;
 	it = is_mandelbrot(vp, frame->it_max);
 	frame->iterations_per_pixel[screen_y][screen_x] = it;
 	return ;
-
-	if (it != frame->it_max)
-	{
-//			if (it > 0)
-//				it = log(it) / log(frame->it_max) * 16;
-			it = (double)it / frame->it_max * 16;
-			rgb = get_palette(it);
-//		else {
-//			it = it / (double)frame->it_max * 100;
-//			rgb = (t_color){cclamp(255-it * 2), cclamp(255-it*6), cclamp(255-it*1)};
-//			rgb = (t_color){cclamp(255-it * 6), cclamp(255-it*2), cclamp(255-it*10)};
-//		}
-	put_pxl_to_image(screen_x, screen_y, frame, rgb);
-	}
-	else
-		put_pxl_to_image(screen_x, screen_y, frame, (t_color){0, 0, 0});
-
 }

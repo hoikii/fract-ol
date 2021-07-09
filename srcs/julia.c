@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:40:57 by kanlee            #+#    #+#             */
-/*   Updated: 2021/06/29 20:10:17 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/06/30 16:56:18 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int		is_julia(t_complex z, int it_max, t_complex c)
 
 void	julia_calc(int screen_x, int screen_y, t_mlx *frame)
 {
-	t_complex vp;
-	char *imgdata;
-	int pos;
-	int it;
+	t_complex	vp;
+	char		*imgdata;
+	int			pos;
+	int			it;
 
 	vp.real = frame->upperleft.x + screen_x / frame->scale;
 	vp.imag = frame->upperleft.y - screen_y / frame->scale;
@@ -39,4 +39,3 @@ void	julia_calc(int screen_x, int screen_y, t_mlx *frame)
 	frame->iterations_per_pixel[screen_y][screen_x] = it;
 	return ;
 }
-
