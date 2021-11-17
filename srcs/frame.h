@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:35:18 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/09/29 16:59:14 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ typedef struct s_mlx {
 	t_point			move_from;
 	t_point			move_from_vp;
 	int				julia_ctl_clicked;
+	int				*histogram;
+	t_color			*color_table;
+	long long		total_iterations;
 }				t_mlx;
 
 typedef struct s_threads {

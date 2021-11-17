@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:51:17 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:39:33 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/09/29 16:15:20 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ int	mouse_release(int btn, int click_x, int click_y, t_mlx *frame)
 		dx = click_x - frame->move_from.x;
 		dy = click_y - frame->move_from.y;
 		frame->lbtn_pressed = 0;
-/*
-		frame->center.x = frame->move_from_vp.x -
-			(int)(click_x - frame->move_from.x) / frame->scale;
-		frame->center.y = frame->move_from_vp.y +
-			(int)(click_y - frame->move_from.y) / frame->scale;
-*/
 		frame->center.x = frame->move_from_vp.x - dx / frame->scale;
 		frame->center.y = frame->move_from_vp.y + dy / frame->scale;
 		frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
@@ -109,26 +103,6 @@ void	move_image(int click_x, int click_y, t_mlx *frame)
 			frame->img_move.imgdata[pos + 3] = frame->img.imgdata[oldpos + 3];
 		}
 	}
-/*
-	i = -1;
-	while (++i < IMG_HEIGHT)
-	{
-		j = -1;
-		while (++j < IMG_WIDTH)
-		{
-			oi = i - (click_y - frame->move_from.y);
-			oj = j - (click_x - frame->move_from.x);
-			oi = clamp_i(oi, 0, IMG_HEIGHT - 1);
-			oj = clamp_i(oj, 0, IMG_WIDTH - 1);
-			int oldpos = oi * frame->img.size_line + oj * frame->img.bpp / 8;
-			int pos = i * frame->img.size_line + j * frame->img.bpp / 8;
-			frame->img_move.imgdata[pos + 0] = frame->img.imgdata[oldpos + 0];
-			frame->img_move.imgdata[pos + 1] = frame->img.imgdata[oldpos + 1];
-			frame->img_move.imgdata[pos + 2] = frame->img.imgdata[oldpos + 2];
-			frame->img_move.imgdata[pos + 3] = frame->img.imgdata[oldpos + 3];
-		}
-	}
-*/
 	img_to_window(frame);
 	return ;
 }

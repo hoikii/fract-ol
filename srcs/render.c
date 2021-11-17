@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:38:51 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:37:35 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/09/29 15:34:17 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	render_single(t_mlx *frame)
 				julia_calc(j, i, frame);
 		}
 	}
-//	img_to_window(frame);
 }
 
 #ifdef BONUS
@@ -61,7 +60,6 @@ static void	*render_per_thread(void *arg)
 		if (tid == 0 && i % 1 == 0)
 			img_to_window(frame);
 	}
-//	img_to_window(frame);
 	pthread_exit(NULL);
 }
 

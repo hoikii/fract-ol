@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:46:26 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/09/29 16:32:02 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "frame.h"
 #include "../libft/libft.h"
 #include <stdio.h>
-
-void	prn_histogram(int *histogram, int it_max);
 
 static void	put_julia_constant_ctl(t_mlx *frame)
 {
@@ -97,116 +95,4 @@ void	put_pxl_to_image(int x, int y, t_mlx *frame, t_color rgb)
 	imgdata = frame->img.imgdata;
 	pos = y * frame->img.size_line + x * frame->img.bpp / 8;
 	*(unsigned int *)(&imgdata[pos]) = color;
-}
-
-void	calc_histogram(t_mlx *frame, int *histogram, t_color *color_table)
-{
-	int		i;
-	int		j;
-	int		it_range;
-	t_color	rgb_start;
-	t_color	rgb_end;
-
-	frame->min_it = -1;
-	frame->max_it = 0;
-	i = -1;
-	while (++i < IMG_HEIGHT)
-	{
-		j = -1;
-		while (++j < IMG_WIDTH)
-		{
-			histogram[frame->iterations_per_pixel[i][j]]++;
-			if (frame->min_it > frame->iterations_per_pixel[i][j])
-				frame->min_it = frame->iterations_per_pixel[i][j];
-			if (frame->max_it < frame->iterations_per_pixel[i][j])
-				frame->max_it = frame->iterations_per_pixel[i][j];
-		}
-	}
-
-	rgb_start = (t_color){250, 100, 0};
-	rgb_end = (t_color){255, 255, 255};
-	it_range = frame->max_it - frame->min_it;
-	i = -1;
-	while (++i < it_range)
-	{
-		color_table[i + frame->min_it].r = rgb_start.r
-			+ (rgb_end.r - rgb_start.r) * (double)(i) / (it_range);
-		color_table[i + frame->min_it].g = rgb_start.g
-			+ (rgb_end.g - rgb_start.g) * (double)(i) / (it_range);
-		color_table[i + frame->min_it].b = rgb_start.b
-			+ (rgb_end.b - rgb_start.b) * (double)(i) / (it_range);
-	}
-}
-
-void	coloring(int i, int j, t_mlx *frame, int *histogram, t_color *color_table, long long total_iterations)
-{
-	double			cc;
-	unsigned int	min;
-	int				max;
-	int				aa;
-
-	min = frame->min_it;
-	max = frame->max_it;
-	cc = histogram[frame->iterations_per_pixel[i][j]] / (double)total_iterations;
-	if (frame->color_mode == 0)
-		put_pxl_to_image(j, i, frame, get_palette(cc * 15));
-	else if (frame->color_mode == 1)
-	{
-		aa = frame->iterations_per_pixel[i][j];
-		put_pxl_to_image(j, i, frame, get_palette(aa % 16));
-	}
-	else if (frame->color_mode == 2)
-		put_pxl_to_image(j, i, frame, color_table[(int)(cc * (max - min) + min)]);
-	else if (frame->color_mode == 3)
-	{
-		aa = frame->iterations_per_pixel[i][j];
-		if (cc > 0.7)
-			put_pxl_to_image(j, i, frame, get_palette(cc * 15));
-		else
-			put_pxl_to_image(j, i, frame, get_palette((aa * 2) % 16));
-		put_pxl_to_image(j, i, frame, (t_color){0, cc * 255, 0});
-	}
-}
-
-void	map_colors(t_mlx *frame)
-{
-	int			*histogram;
-	long long	total_iterations;
-	int			i;
-	int			j;
-	t_color		*color_table;
-
-	histogram = malloc(sizeof(int) * (frame->it_max + 1));
-	if (!histogram)
-		return ;
-	ft_bzero(histogram, sizeof(int) * (frame->it_max + 1));
-	color_table = malloc(sizeof(t_color) * (frame->it_max + 1));
-	if (!color_table)
-		return ;
-	calc_histogram(frame, histogram, color_table);
-
-	total_iterations = 0;
-	i = -1;
-	while (++i <= frame->it_max)
-	{
-		total_iterations += histogram[i];
-		histogram[i] = total_iterations;
-	}
-
-	i = -1;
-	while (++i < IMG_HEIGHT)
-	{
-		j = -1;
-		while (++j < IMG_WIDTH)
-		{
-			if (frame->iterations_per_pixel[i][j] == frame->it_max)
-			{
-				put_pxl_to_image(j, i, frame, (t_color){0, 0, 0});
-				continue ;
-			}
-			coloring(i, j, frame, histogram, color_table, total_iterations);
-		}
-	}
-	free(histogram);
-	free(color_table);
 }

@@ -8,6 +8,8 @@ SRCFILES	= main.c \
 			  math_utils.c \
 			  render.c \
 			  image.c \
+			  image_histogram.c \
+			  image_color.c \
 			  color.c \
 			  mandelbrot.c \
 			  julia.c \
