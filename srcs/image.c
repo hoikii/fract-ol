@@ -6,14 +6,13 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/09/29 16:32:02 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 15:48:32 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "frame.h"
 #include "../libft/libft.h"
-#include <stdio.h>
 
 static void	put_julia_constant_ctl(t_mlx *frame)
 {

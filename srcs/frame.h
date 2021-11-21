@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/09/29 16:59:14 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 15:59:36 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,19 @@ typedef enum e_fractal_type {
 	MANDELBROT,
 	JULIASET,
 	KOCH_SNOWFLAKE
-}				t_fractal_type;
+}	t_fractal_type;
+
+typedef enum e_color_mode {
+	COLOR_PALETTE_HISTOGRAM,
+	COLOR_PALETTE_REPEAT,
+	COLOR_GRADIATION,
+	COLOR_GREEN
+}	t_color_mode;
 
 typedef struct s_point {
 	double	x;
 	double	y;
-}				t_point;
+}	t_point;
 
 typedef struct s_img {
 	void	*img_ptr;
@@ -59,7 +66,7 @@ typedef struct s_img {
 	int		endian;
 	int		width;
 	int		height;
-}				t_img;
+}	t_img;
 
 typedef struct s_mlx {
 	void			*mlx;
@@ -89,12 +96,12 @@ typedef struct s_mlx {
 	int				*histogram;
 	t_color			*color_table;
 	long long		total_iterations;
-}				t_mlx;
+}	t_mlx;
 
 typedef struct s_threads {
 	int		tid;
 	t_mlx	*frame;
-}				t_threads;
+}	t_threads;
 
 int		set_fractal_type(t_mlx *frame, int ac, char **av);
 void	init_frame(t_mlx *frame);
