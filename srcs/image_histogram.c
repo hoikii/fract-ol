@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/09/30 00:20:38 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 16:04:57 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	check_iteration_range(t_mlx *frame, int *histogram)
 		while (++j < IMG_WIDTH)
 		{
 			histogram[frame->iterations_per_pixel[i][j]]++;
-			if (frame->min_it > frame->iterations_per_pixel[i][j])
+			if (frame->min_it > (unsigned int)frame->iterations_per_pixel[i][j])
 				frame->min_it = frame->iterations_per_pixel[i][j];
 			if (frame->max_it < frame->iterations_per_pixel[i][j])
 				frame->max_it = frame->iterations_per_pixel[i][j];
@@ -37,7 +37,7 @@ static void	check_iteration_range(t_mlx *frame, int *histogram)
 	}
 }
 
-void	calc_histogram(t_mlx *frame, int *histogram, t_color *color_table)
+void	set_gradiation_table(t_mlx *frame, int *histogram, t_color *color_table)
 {
 	int		i;
 	int		it_range;
@@ -69,7 +69,7 @@ static int	init_color_table(t_mlx *frame)
 	if (!frame->histogram || !frame->color_table)
 		return (0);
 	ft_bzero(frame->histogram, sizeof(int) * (frame->it_max + 1));
-	calc_histogram(frame, frame->histogram, frame->color_table);
+	set_gradiation_table(frame, frame->histogram, frame->color_table);
 	frame->total_iterations = 0;
 	i = -1;
 	while (++i <= frame->it_max)
