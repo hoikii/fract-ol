@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:41 by kanlee            #+#    #+#             */
-/*   Updated: 2021/11/21 15:59:36 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 17:57:47 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 typedef enum e_fractal_type {
 	MANDELBROT,
 	JULIASET,
-	KOCH_SNOWFLAKE
+	BURNINGSHIP
 }	t_fractal_type;
 
 typedef enum e_color_mode {
@@ -112,6 +112,7 @@ int		img_to_window(t_mlx *frame);
 void	render(t_mlx *frame);
 void	mandelbrot_calc(int x, int y, t_mlx *frame);
 void	julia_calc(int x, int y, t_mlx *frame);
+void	bship_calc(int x, int y, t_mlx *frame);
 void	map_colors(t_mlx *frame);
 
 #endif

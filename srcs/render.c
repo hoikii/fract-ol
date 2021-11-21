@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 16:38:51 by kanlee            #+#    #+#             */
-/*   Updated: 2021/09/29 15:34:17 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 17:48:24 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	render_single(t_mlx *frame)
 				mandelbrot_calc(j, i, frame);
 			else if (frame->type == JULIASET)
 				julia_calc(j, i, frame);
+			else if (frame->type == BURNINGSHIP)
+				bship_calc(j, i, frame);
 		}
 	}
 }
@@ -56,6 +58,8 @@ static void	*render_per_thread(void *arg)
 				mandelbrot_calc(j, i, frame);
 			else if (frame->type == JULIASET)
 				julia_calc(j, i, frame);
+			else if (frame->type == BURNINGSHIP)
+				bship_calc(j, i, frame);
 		}
 		if (tid == 0 && i % 1 == 0)
 			img_to_window(frame);

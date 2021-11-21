@@ -13,6 +13,7 @@ SRCFILES	= main.c \
 			  color.c \
 			  mandelbrot.c \
 			  julia.c \
+			  burningship.c \
 			  mouse_julia_constant_control.c
 SRCS		= $(addprefix $(SRCDIR), $(SRCFILES))
 OBJS		= $(SRCS:.c=.o)

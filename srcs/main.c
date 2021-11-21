@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:41:09 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 18:44:10 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2 || set_fractal_type(&frame, ac, av) <= 0)
 	{
-		printf("fractol <mandelbrot | julia [(double), (double)] | koch>\n");
+		printf("fractol <mandelbrot | julia [double, double] | burningship>\n");
 		return (-1);
 	}
 	init_frame(&frame);

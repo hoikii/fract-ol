@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/11/21 17:29:52 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 18:23:21 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ int	set_fractal_type(t_mlx *frame, int ac, char **av)
 	frame->center = (t_point){-0.5, 0};
 	frame->scale = IMG_WIDTH / 3;
 	frame->it_max = 1600;
+	frame->color_mode = 0;
 	if (ft_strequ(av[1], "mandelbrot") || ft_strequ(av[1], "m"))
 		frame->type = MANDELBROT;
 	else if (ft_strequ(av[1], "julia") || ft_strequ(av[1], "j"))
 		julia_init(frame, ac, av);
-	else if (ft_strequ(av[1], "koch"))
-		frame->type = KOCH_SNOWFLAKE;
+	else if (ft_strequ(av[1], "burningship") || ft_strequ(av[1], "b"))
+	{
+		frame->type = BURNINGSHIP;
+		frame->it_max = 200;
+		frame->color_mode = COLOR_GRADIATION;
+	}
 	else
 		return (0);
 	return (1);
@@ -104,7 +109,6 @@ void	init_frame(t_mlx *frame)
 			&frame->img_move.endian);
 	frame->lbtn_pressed = 0;
 	frame->zoom_mode = 0;
-	frame->color_mode = 0;
 	frame->julia_ctl_clicked = 0;
 	if (frame->type == JULIASET)
 		load_julia_ctl_pad(frame);
