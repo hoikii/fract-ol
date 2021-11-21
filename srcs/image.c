@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 15:20:42 by kanlee            #+#    #+#             */
-/*   Updated: 2021/11/21 15:48:32 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 16:28:34 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,15 @@ static void	put_info(t_mlx *frame)
 	else
 		msg = "zoom mode: fixed";
 	mlx_string_put(frame->mlx, frame->win, 10, 120, 0x00ffffff, msg);
+	if (frame->type != JULIASET)
+		return ;
 	mlx_string_put(frame->mlx, frame->win, 10, 160, 0x00ffffff,
 		"julia constant");
 	str_join_put(frame, "real part = ",
 		ft_ftoa(frame->julia_constant.real, 5), 175);
 	str_join_put(frame, "imaginary = ",
 		ft_ftoa(frame->julia_constant.imag, 5), 190);
-	if (frame->type == JULIASET)
-		put_julia_constant_ctl(frame);
+	put_julia_constant_ctl(frame);
 }
 
 int	img_to_window(t_mlx *frame)

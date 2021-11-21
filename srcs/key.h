@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:33:36 by kanlee            #+#    #+#             */
-/*   Updated: 2021/05/29 17:04:39 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 17:03:11 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 #  define KEY_L 108
 #  define KEY_1 49
 #  define KEY_2 50
+#  define KEY_3 51
+#  define KEY_4 52
+#  define KEY_5 53
 #  define KEY_T 116
 #  define KEY_COMMA 44
 #  define KEY_PERIOD 46
@@ -77,6 +80,9 @@
 #  define KEY_L 37
 #  define KEY_1 18
 #  define KEY_2 19
+#  define KEY_3 20
+#  define KEY_4 21
+#  define KEY_5 23
 #  define KEY_T 17
 #  define KEY_COMMA 43
 #  define KEY_PERIOD 47

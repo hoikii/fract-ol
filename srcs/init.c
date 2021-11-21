@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:49:08 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/21 17:29:52 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,7 @@ int	set_fractal_type(t_mlx *frame, int ac, char **av)
 {
 	frame->center = (t_point){-0.5, 0};
 	frame->scale = IMG_WIDTH / 3;
-	frame->center = (t_point){-0.725703, 0.250738};
-	frame->it_max = 50;
-	frame->scale = 1104900.05530 * 200;
 	frame->it_max = 1600;
-//	frame->scale = 110 * 200;
-//	frame->it_max = 200;
-//	frame->center = (t_point){-1.985528, 0};
-//	frame->center = (t_point){-1.996380, -0.000004};
-	frame->center = (t_point){-0.015439, 1.020888};
-//	frame->scale = IMG_WIDTH / 3;
-//	frame->it_max = 50;
 	if (ft_strequ(av[1], "mandelbrot") || ft_strequ(av[1], "m"))
 		frame->type = MANDELBROT;
 	else if (ft_strequ(av[1], "julia") || ft_strequ(av[1], "j"))
