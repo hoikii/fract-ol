@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 13:28:35 by kanlee            #+#    #+#             */
-/*   Updated: 2021/07/09 18:38:11 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/22 16:28:29 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,31 @@ typedef struct s_counter {
 }				t_counter;
 
 /*
-** With unoptimized version, We need five multiplications per each iterations.
-** (three for znext = z^2 + c, two for checking escape condition)
-** This can be reduced to three by caching (z.real)^2 and (z.imaginary)^2.
-**
-** znext.real = (z.real)^2 - (z.imag)^2 + c.real
-** znext.imag = 2 * z.real * z.imag + c.imag
-** escape if |znext|^2 = (z.real)^2 + (z.imag)^2 >= 2^2
+ * With unoptimized version, We need five multiplications per each iterations.
+ * (three for znext = z^2 + c, two for checking escape condition)
+ * This can be reduced to three by caching (z.real)^2 and (z.imaginary)^2.
+ *
+ * znext.real = (z.real)^2 - (z.imag)^2 + c.real
+ * znext.imag = 2 * z.real * z.imag + c.imag
+ * escape if |znext|^2 = (z.real)^2 + (z.imag)^2 >= 2^2
 */
 
 /*
-**int		is_mandelbrot(t_complex p, int it_max)
-**{
-**	t_complex	z;
-**	int			it;
-**
-**	z = (t_complex){0, 0};
-**	it = -1;
-**	while (++it < it_max)
-**	{
-**		z = c_add(c_square(z), p);
-**		if (c_abs_squared(z) >= 4.0)
-**			return (it);
-**	}
-**	return (0);
-**}
+int		is_mandelbrot(t_complex p, int it_max)
+{
+	t_complex	z;
+	int			it;
+
+	z = (t_complex){0, 0};
+	it = -1;
+	while (++it < it_max)
+	{
+		z = c_add(c_square(z), p);
+		if (c_abs_squared(z) >= 4.0)
+			return (it);
+	}
+	return (0);
+}
 */
 
 static int	detect_cycle(t_complex z, t_counter *counter)

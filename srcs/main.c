@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/11/21 18:44:10 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/22 16:29:36 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 #include "../libft/libft.h"
 
 /*
-** watch WM_DELETE_WINDOW event on Linux and DestroyNotify on MacOS
-** to detect closing a window.
-**
-** On Linux, window goes blank when minimized and then restored.
-** Redraw an image again when detects VisibilityNotify (15) and
-** VisibilityChangeMask (1L<<16)
+ * watch WM_DELETE_WINDOW event on Linux and DestroyNotify on MacOS
+ * to detect closing a window.
+ *
+ * On Linux, window goes blank when minimized and then restored.
+ * Redraw an image again when detects VisibilityNotify (15) and
+ * VisibilityChangeMask (1L<<16)
 */
 
 #define VISIBILITYNOTIFY 15
@@ -33,10 +33,10 @@
 #define MOTIONNOTIFY 6
 
 /*
-** #define BUTTONPRESSMASK 1L<<2
-** #define BUTTONRELEASEMASK 1L<<3
-** #define POINTERMOTIONMASK 1L<<6
-** #define BUTTON1MOTIONMASK 1L<<8
+#define BUTTONPRESSMASK 1L<<2
+#define BUTTONRELEASEMASK 1L<<3
+#define POINTERMOTIONMASK 1L<<6
+#define BUTTON1MOTIONMASK 1L<<8
 */
 
 #ifdef LINUX

@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:34:56 by kanlee            #+#    #+#             */
-/*   Updated: 2021/11/21 17:30:22 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/22 16:53:59 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static int	key_pressed3(int keycode, t_mlx *frame)
 		else if (keycode == KEY_2)
 		{
 			frame->center = (t_point){-0.015439, 1.020888};
-			frame->scale = 1104900.05530*200;
+			frame->scale = 1104900.05530 * IMG_WIDTH / 3;
 		}
 		else if (keycode == KEY_3)
 			frame->center = (t_point){-1.996380, -0.000004};
 		else if (keycode == KEY_4)
 		{
 			frame->center = (t_point){-0.725703, 0.250738};
-			frame->scale = 1104900.05530*200;
+			frame->scale = 1104900.05530 * IMG_WIDTH / 3;
 		}
 		frame->upperleft.x = frame->center.x - IMG_WIDTH / frame->scale / 2;
 		frame->upperleft.y = frame->center.y + IMG_HEIGHT / frame->scale / 2;

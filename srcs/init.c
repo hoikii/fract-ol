@@ -6,7 +6,7 @@
 /*   By: kanlee <kanlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:38:07 by kanlee            #+#    #+#             */
-/*   Updated: 2021/11/21 18:23:21 by kanlee           ###   ########.fr       */
+/*   Updated: 2021/11/22 16:53:05 by kanlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int	set_fractal_type(t_mlx *frame, int ac, char **av)
 	else if (ft_strequ(av[1], "burningship") || ft_strequ(av[1], "b"))
 	{
 		frame->type = BURNINGSHIP;
-		frame->it_max = 200;
+		frame->it_max = 100;
+		frame->scale = 9.5 * IMG_WIDTH / 3;
 		frame->color_mode = COLOR_GRADIATION;
+		frame->center = (t_point){-1.762717312262, 0.028478677458};
 	}
 	else
 		return (0);
